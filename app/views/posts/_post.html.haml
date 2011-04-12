@@ -1,0 +1,12 @@
+%h2= post.title
+%p= post.body
+%p= post.published_on.utc.localtime("+10:00").strftime("%A %d %B, %Y - %T")
+%p= image_tag post.image_url(:thumb) if post.image_url
+%table
+  -post.information.tags.each do |tag|
+    %tr
+      %td=tag.to_s
+      - if post.information[tag].is_a?(String)
+        %td=post.information[tag].force_encoding('ASCII-8BIT')
+      -else
+        %td=post.information[tag]

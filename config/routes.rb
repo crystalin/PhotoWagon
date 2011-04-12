@@ -1,4 +1,14 @@
 Photowagon::Application.routes.draw do
+
+  resources :posts do
+    collection do
+      get :recreate_images
+    end
+  end
+
+  match "/picasa" => 'posts#picasa'
+  match "/picasa_upload" => 'posts#picasa_upload'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,7 +58,7 @@ Photowagon::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => "welcome#index"
+  root :to => "posts#index"
 
   # See how all your routes lay out with "rake routes"
 

@@ -1,0 +1,8 @@
+.third{:class => ("last" if front_post_counter%3 == 2)}
+  .front_post
+    %h2.title= front_post.title
+    .subtitle= front_post.published_on.utc.localtime("+10:00").strftime("%A %d %B, %Y - %T") if front_post.published_on
+    .image=link_to image_tag(front_post.image_url(:front_page)), front_post.image_url, :title => front_post.title, :rel => 'front_image', :class => "popup_image"  if front_post.image_url
+    .description= front_post.body
+-if front_post_counter%3 == 2
+  .clear
