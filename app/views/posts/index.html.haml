@@ -1,0 +1,6 @@
+.cover_post
+  .image= image_tag @posts.first.image_url(:cover) if @posts.first
+=render :partial => "front_post", :collection => @posts
+.clear
+= paginate @posts
+-#%p= button_to "Picasa Button", "picasa://importbutton/?url=http://192.168.11.19:3000/picasa_2_photowagon.pbz"
