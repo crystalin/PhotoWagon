@@ -19,8 +19,9 @@ test: &test
 
 production:
   adapter: mysql
-  database: photowagon_prod
-  username: photowagon
+  database: japonwagon
+  username: japonwagon
+  password: yaTggoaw!3d!a
   pool: 5
   timeout: 5000
 

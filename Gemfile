@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.5'
+gem 'rails'
 
 gem 'mysql'
 
@@ -9,11 +9,12 @@ gem 'compass-960-plugin'
 gem 'haml'
 
 gem "rmagick"
+
 gem 'carrierwave'
 
 gem 'mini_exiftool'
 
-gem 'stalker'
+#gem 'stalker'  // not yet
 
 gem 'kaminari'
 
@@ -22,6 +23,7 @@ gem 'jquery-rails'
 group :development do
   gem 'haml-rails'
   gem 'rails3-generators'
+  gem 'capistrano'
 #  gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git', :require => 'rails_development_boost'
 end
 

@@ -1,7 +1,7 @@
 == Welcome to Rails
 
 === Requirements
-- RMagick
+- RMagick        (sudo apt-get install imagemagick)
 - Beanstalkd
 
 === To Run
