@@ -47,3 +47,10 @@ Photowagon::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 end
+
+#TODO: Remove it once Rewind is fixed
+class String
+  def rewind
+    puts "Rewind String"
+  end
+end
