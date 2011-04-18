@@ -1,8 +1,8 @@
 == Welcome to Rails
 
 === Requirements
-- RMagick        (sudo apt-get install imagemagick)
-- Beanstalkd
+- RMagick        (sudo apt-get install imagemagick libmagick9-dev ruby1.8-dev)
+##- Beanstalkd
 
 === To Run
 - Mysql

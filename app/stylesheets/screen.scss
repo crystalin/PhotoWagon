@@ -48,13 +48,14 @@ body {
   }
 
   #content {
-    background: url('../../images/container-bg.png')
+    background: url('../../images/container-bg.png');
+    min-height: 600px;
   }
 
   #footer {
     border-top: 2px solid #000;
     min-height: 200px;
-    background: #619;
+    background: url('../../images/footer-bg.png') repeat-x white;
   }
 }
 

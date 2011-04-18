@@ -8,6 +8,7 @@ Photowagon::Application.routes.draw do
 
   match "/picasa" => 'posts#picasa'
   match "/picasa_upload" => 'posts#picasa_upload'
+  match "/install_picasa" => 'home#install_picasa'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

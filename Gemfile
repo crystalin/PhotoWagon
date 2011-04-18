@@ -8,11 +8,11 @@ gem 'compass'
 gem 'compass-960-plugin'
 gem 'haml'
 
-gem "rmagick"
+gem "rmagick", :platforms => :ruby
 
 gem 'carrierwave'
 
-gem 'mini_exiftool'
+gem 'mini_exiftool', :platforms => :ruby
 
 #gem 'stalker'  // not yet
 

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<buttons format="1" version="1.0">
+	<button id="picasajapon/{27723dd4-b232-4bef-87da-77ecc6afd111}" type="dynamic">
+		<icon name="{27723dd4-b232-4bef-87da-77ecc6afd111}/25x25" src="pbz"/>
+		<label>Japon Rails Local</label>
+		<tooltip>Upload to Japon Rails</tooltip>
+		<action verb="hybrid">
+			<param name="url" value="http://japon.crystalin.fr/picasa"/>
+		</action>
+	</button>
+</buttons>
