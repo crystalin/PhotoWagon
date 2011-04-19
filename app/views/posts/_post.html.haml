@@ -1,6 +1,6 @@
 %h2= post.title
 %p= post.body
-%p= post.published_on.utc.getlocal("+10:00").strftime("%A %d %B, %Y - %T")
+%p= post.published_on.getlocal.strftime("%A %d %B, %Y - %T")
 %p= image_tag post.image_url(:thumb) if post.image_url
 %table
   -post.information.tags.each do |tag|

@@ -9,8 +9,8 @@ class Post < ActiveRecord::Base
     if image != nil
       self.title = information['Headline'] || 'No title'
       self.body = information['Caption-Abstract'] || 'No Legend'
-      self.published_on = information['CreateDate'] || Time.now
-      puts "#{information['CreateDate'].class.name} : #{information['CreateDate']}"
+      self.published_on = information['DateTimeOriginal'] || information['CreateDate'] ||Time.now
+#      puts "#{information['DateTimeOriginal'].class.name} : #{information['DateTimeOriginal']}"
     end
   end
 

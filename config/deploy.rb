@@ -32,7 +32,7 @@ after "deploy:migrate", "deploy:restart"
 namespace :deploy do
   task :bundle_gems, :roles => :app do
     run "rvm gemset create photowagon"
-    run "cd #{release_path} && bundle install --without production test"
+    run "cd #{release_path} && bundle install --without production test && rvm rvmrc trust"
   end
   task :start do ; end
   task :stop do ; end
