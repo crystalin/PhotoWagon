@@ -62,14 +62,14 @@ class PostsController < ApplicationController
       if not @items.is_a? Array
         @items = [@items]
       end
-      puts rss_hash.to_json
-      puts @items
+#      puts rss_hash.to_json
+#      puts @items
     end
     render :layout => false
   end
 
   def picasa_upload
-    puts params.to_yaml
+#    puts params.to_yaml
     params[:notice] ||= ""
     params.each do |name, uploaded_file|
       if uploaded_file.is_a? ActionDispatch::Http::UploadedFile

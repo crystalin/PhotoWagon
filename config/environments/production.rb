@@ -51,6 +51,5 @@ end
 #TODO: Remove it once Rewind is fixed
 class String
   def rewind
-    puts "Rewind String"
   end
 end
