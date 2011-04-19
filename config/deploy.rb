@@ -1,3 +1,8 @@
+$:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory to the load path.
+require "rvm/capistrano"                  # Load RVM's capistrano plugin.
+set :rvm_ruby_string, '1.9.2-p180@photowagon'        # Or whatever env you want it to run in.
+set :rvm_type, :user
+
 set :application, "photowagon"
 set :repository,  "https://github.com/crystalin/PhotoWagon.git"
 
@@ -25,8 +30,9 @@ after "deploy:migrate", "deploy:restart"
 
 #If you are using Passenger mod_rails uncomment this:
 namespace :deploy do
-  task :bundle_gems do
-    run "cd #{deploy_to}/current && bundle install --path vendor/gems --without production test"
+  task :bundle_gems, :roles => :app do
+    run "rvm gemset create photowagon"
+    run "cd #{release_path} && bundle install --without production test"
   end
   task :start do ; end
   task :stop do ; end
