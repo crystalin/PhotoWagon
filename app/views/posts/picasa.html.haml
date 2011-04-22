@@ -3,7 +3,7 @@
   - @items.each_with_index do |item, index|
     .third{:class => ("last" if index%3 == 2)}
       .front_post
-        .image= image_tag "#{item['imgsrc']}?size=200"
+        .image= image_tag "#{item['thumbnail']}"
         =hidden_field_tag "#{item['imgsrc']}?size=1600"
   .buttons.clear
     %input{:type=>'submit', :class=>"button", :value=>"Upload"}

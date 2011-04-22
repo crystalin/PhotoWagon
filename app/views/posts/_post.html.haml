@@ -1,12 +1,25 @@
-%h2= post.title
-%p= post.body
-%p= post.published_on.getlocal.strftime("%A %d %B, %Y - %T")
-%p= image_tag post.image_url(:thumb) if post.image_url
-%table
-  -post.information.tags.each do |tag|
-    %tr
-      %td=tag.to_s
-      - if post.information[tag].is_a?(String)
-        %td=post.information[tag].force_encoding('ASCII-8BIT')
-      -else
-        %td=post.information[tag]
+.post
+  .title
+    .links
+      %span.link=link_to "Lire les commentaires (#{post.comments.count})", "#comments"
+      %span.link=link_to "Ecrire un commentaire", "#comments"
+    %h2= post.title
+    .subtitle= post.published_on.getlocal.strftime("%A %d %B, %Y - %T")
+    .clear
+  %div{:class => "image " + (post.information["ExifImageWidth"] > post.information["ExifImageHeight"] ? "horizontal" : "vertical")}= image_tag post.image_url(:full_page), :width => "100%" if post.image_url
+  .description= post.body
+  .photograph Alan Sap&egrave;de
+  .front_comments#comments
+    %h3 Commentaires
+    =render post.comments
+    = "Aucun commentaire" if post.comments.count == 0
+  .clear
+=render "comments/form"
+-#%table
+-#  -post.information.tags.each do |tag|
+-#    %tr
+-#      %td=tag.to_s
+-#      - if post.information[tag].is_a?(String)
+-#        %td=post.information[tag].force_encoding('ASCII-8BIT')
+-#      -else
+-#        %td=post.information[tag]

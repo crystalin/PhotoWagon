@@ -32,16 +32,19 @@ class ImageUploader < CarrierWave::Uploader::Base
     Stalker.enqueue("image.resize", :image_id => original_filename, :width => width, :height => height)
   end
 
-  version :thumb do
-    process :resize_to_fill => [200, 150]
+  version :full_page do
+    process :resize_to_fit => [1600, 1600]
+    process :quality => 80
   end
 
   version :front_page do
     process :resize_to_fill => [300, 168]
+    process :quality => 80
   end
 
   version :cover do
     process :resize_to_fill => [972, 240]
+    process :quality => 80
   end
 
   # Create different versions of your uploaded files:

@@ -3,6 +3,7 @@ class Post < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   before_save :read_information
+  has_many :comments
 
   def read_information
     @information = nil

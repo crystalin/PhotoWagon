@@ -24,6 +24,7 @@ group :development do
   gem 'haml-rails'
   gem 'rails3-generators'
   gem 'capistrano'
+  gem "nifty-generators"
 #  gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git', :require => 'rails_development_boost'
 end
 
@@ -34,6 +35,7 @@ group :test do
   gem 'cucumber'
   gem 'rspec-rails'
   gem 'spork'
+  gem "mocha"
 
   gem 'machinist', '>= 2.0.0.beta1'
   gem 'faker'

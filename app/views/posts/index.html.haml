@@ -2,4 +2,4 @@
   .image= image_tag @posts.first.image_url(:cover) if @posts.first
 =render :partial => "front_post", :collection => @posts
 .clear
-= paginate @posts
+= paginate @posts, :inner_window => 10, :outer_window => 3
