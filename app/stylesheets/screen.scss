@@ -43,6 +43,9 @@ body {
     @include container;
     position: relative;
     min-height: 100%;
+    border-top: 1px solid #888;
+    border-right: 1px solid #888;
+    border-left: 1px solid #888;
   }
   #header, #footer, #content {
     @include column($blueprint-grid-columns);
@@ -73,7 +76,7 @@ body {
       font-size: 72px;
       text-indent: -9999px;
       display: block;
-      height: 84px;
+      height: 83px;
       width: 400px;
       margin: 0 0 0 56%;
     }

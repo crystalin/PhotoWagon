@@ -1,4 +1,4 @@
 .comment
   .author #{comment.author}:
-  .content= comment.content
+  .content= simple_format(comment.content)
   -#.clear

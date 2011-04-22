@@ -2,12 +2,12 @@
   = form_for @comment do |f|
     = hidden_field_tag :post_id, @post.id.to_s
     %p
-      = f.label :author
+      = f.label :author, "Votre nom"
       %br
       = f.text_field :author
     %p
-      = f.label :content
+      = f.label :content, "Commentaire"
       %br
       = f.text_area :content, :rows => "7"
     %p
-      = f.submit
+      = f.submit "Envoyer"

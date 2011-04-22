@@ -7,7 +7,7 @@
     .subtitle= post.published_on.getlocal.strftime("%A %d %B, %Y - %T")
     .clear
   %div{:class => "image " + (post.information["ExifImageWidth"] > post.information["ExifImageHeight"] ? "horizontal" : "vertical")}= image_tag post.image_url(:full_page), :width => "100%" if post.image_url
-  .description= post.body
+  .description= simple_format(post.body)
   .photograph Alan Sap&egrave;de
   .front_comments#comments
     %h3 Commentaires
