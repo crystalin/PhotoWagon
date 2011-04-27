@@ -4,8 +4,6 @@ class ApplicationController < ActionController::Base
   helper_method :missing_photos
   helper_method :last_visited_page
 
-  before_filter :update_counter
-
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => "L'acc&#233;s a cette page est r&#233;serv&#233;e aux administrateurs".html_safe
