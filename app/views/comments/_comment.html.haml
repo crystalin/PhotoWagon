@@ -1,4 +1,11 @@
+-selected_comments ||= []
+-selected =  selected_comments.include?(comment)
+-show_date ||= false
+-#.comment{:class => ("highlight" if selected)}
 .comment
-  .author #{comment.author}:
-  .content= simple_format(comment.content)
+  .author
+    #{comment.author}:
+  .content
+    = simple_format(comment.content)
+    %span.date= "#{comment.created_at.getlocal.strftime("%k:%m le %d %B")}" if show_date
   -#.clear

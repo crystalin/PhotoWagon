@@ -11,10 +11,15 @@
   %body
     -#=link_to "<h1>Far in Japan</h1>".html_safe, root_path
     .site_title
-      %h1=link_to "Far in Japan".html_safe, root_path
+      %h1=link_to "Far in Japan", root_path
     #container
-      #header
       #content
+        #header
+          #menu
+            %ul
+              %li= link_to "Accueil", root_path
+              %li= link_to "Derniers Commentaires", comments_path
+            .clear
         = yield
       #footer
         = render 'layouts/footer'

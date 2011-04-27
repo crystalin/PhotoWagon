@@ -68,6 +68,13 @@ body {
   }
 }
 
+h2 {
+  font-size: 28px;
+  color: #846;
+  margin: 5px 2px;
+  padding: 5px 10px;
+}
+
 .site_title {
   text-align: center;
   h1 {
@@ -87,8 +94,9 @@ body {
   padding: 10px;
   .title {
     color: #744;
-    margin-bottom: 1px solid #000;
     font-size: 16px;
+    margin: 0;
+    padding: 0;
   }
   .subtitle {
     color: #383;
@@ -118,14 +126,15 @@ body {
   border-bottom: 2px solid #333;
 
   .title {
-    border-bottom: 2px solid #383;
+    /*border-bottom: 2px solid #383;*/
     margin: 5px 0;
     padding: 0 10px;
     h2 {
       font-size: 22px;
       font-weight: bold;
-      margin-right: 30px;
-      color: #383;
+      margin: 0 30px 0 0;
+      padding: 0;
+      /*color: #383;*/
       float: left;
     }
     .links {
@@ -219,11 +228,67 @@ a, a:visited {
       padding-top: 3px;
       line-height: 15px;
     }
+    &.highlight {
+      .author {
+        color: #252;
+      }
+      .content {
+        color: #264;
+      }
+    }
+    .date {
+      color: #555;
+      font-size: 11px;
+    }
   }
   h3 {
-    text-decoration: underline;
+    border-bottom: 1px solid #000;
   }
 }
 .comment_form {
   padding: 5px;
+}
+.comment_link {
+  margin-top: 2px;
+}
+
+.comment_line {
+  .image {
+    float: left;
+    margin: 5px;
+    border: 2px solid black;
+  }
+  .title {
+    font-size: 16px;
+  }
+  .comment_link {
+    margin: 8px 5px 8px 450px;
+    float: right;
+  }
+  .comment {
+    margin-left: 320px;
+  }
+  margin-top: 15px;
+}
+
+#menu {
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      float: left;
+      margin: 0 10px;
+    }
+  }
+
+  a {
+    font: bold 13px arial, helvetica, sans-serif;
+    margin: 0;
+    padding: 2px 3px;
+  }
+  border-bottom: 1px solid #000;
+  margin-bottom: 7px;
+  padding: 2px 10px;
 }

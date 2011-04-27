@@ -1,4 +1,9 @@
 class CommentsController < ApplicationController
+
+  def index
+    @comments = Comment.recent.includes(:post => :comments).page(params[:page]).per(15)
+  end
+
   def new
     redirect_to root_url, :notice => "Pour ecrire un commentaire, merci d'aller sur la page de la photo d'abord"
   end
