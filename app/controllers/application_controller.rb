@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
   def last_visited_page
-    @last_visited ||= (Post.where("published_on <= ?", cookies[:last_post_date].to_time).count / 15.0).to_f.floor + 1 if cookies[:page_counter].to_i > 1
+    @last_visited ||= (Post.where("published_on <= ?", cookies[:last_post_date].to_time).count / 15.0).to_f.floor + 1
   end
 
 end
