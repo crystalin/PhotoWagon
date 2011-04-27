@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  load_and_authorize_resource
+  skip_load_resource :only => :create
 
   def index
     @comments = Comment.recent.includes(:post => :comments).page(params[:page]).per(15)
@@ -11,16 +13,15 @@ class CommentsController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.build(params[:comment])
-    if @comment.save
-      redirect_to @post, :notice => "Successfully created comment."
+    if @comment.save!
+      redirect_to @post, :notice => "Votre commentaire a &#233;t&#233; publi&#233;".html_safe
     else
-      flash[:notice]= "Error while creating the comment."
-      render @post
+      flash[:alert]= "Impossible de cr&#233;er le commentaire".html_safe
+      redirect_to @post
     end
   end
 
   def update
-    @comment = Comment.find(params[:id])
     if @comment.update_attributes(params[:comment])
       redirect_to root_url, :notice  => "Successfully updated comment."
     else

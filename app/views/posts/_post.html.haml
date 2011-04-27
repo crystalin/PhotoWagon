@@ -11,7 +11,7 @@
   .photograph Alan Sap&egrave;de
   .front_comments#comments
     %h3 Commentaires
-    =render post.comments
+    =render :partial => "comments/comment", :collection => post.comments
     = "Aucun commentaire" if post.comments.count == 0
   .clear
 =render "comments/form"

@@ -7,6 +7,6 @@
     .comment_link
       =link_to "Ecrire un commentaire", post_path(front_post, :anchor => "comments")
     .front_comments
-      =render front_post.comments
+      =render :partial => "comments/comment", :collection => front_post.comments if not front_post.comments.empty?
 -if front_post_counter%3 == 2
   .clear

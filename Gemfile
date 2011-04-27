@@ -14,17 +14,22 @@ gem 'carrierwave'
 
 gem 'mini_exiftool', :platforms => :ruby
 
+gem "bcrypt-ruby", :require => "bcrypt"
+
 #gem 'stalker'  // not yet
 
 gem 'kaminari'
 
 gem 'jquery-rails'
 
+gem "cancan"
+
 group :development do
   gem 'haml-rails'
   gem 'rails3-generators'
   gem 'capistrano'
   gem "nifty-generators"
+  gem 'hpricot', :platforms => :ruby
 #  gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git', :require => 'rails_development_boost'
 end
 

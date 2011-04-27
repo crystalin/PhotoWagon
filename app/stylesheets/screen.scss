@@ -68,6 +68,22 @@ body {
   }
 }
 
+#flash_alert {
+  background: #FC9;
+  border: 1px solid #F84;
+  color: #931;
+  margin: 6px;
+  padding: 3px 10px;
+}
+
+#flash_notice {
+  background: #AD9;
+  border: 1px solid #251;
+  color: #271;
+  margin: 6px;
+  padding: 3px 10px;
+}
+
 h2 {
   font-size: 28px;
   color: #846;

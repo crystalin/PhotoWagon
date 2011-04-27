@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html;" charset="UTF-8" />
+
+<title>Picasa 2 Yapb Upload - Lost in Australia - WordPress</title>
+
+</head>
+<body class="wp-admin no-js  posts_page_p2y_class">
+
+<form id='p2y_upload' enctype="multipart/form-data" action="http://192.168.11.19:3000/picasa_upload" method="post">
+
+
+<table>
+<%- @items.each_with_index do |item, index| %>
+<tr valign="top">
+<td>
+<img src='<%= "#{item['imgsrc']}?size=200" %>'>
+<input type=hidden class='photo_file' name='<%= "#{item['imgsrc']}?size=1600" %>'>
+<input type='submit' class="button" value="Upload">
+</td>
+</tr>
+<%- end %>
+
+  HELLO
+</table>
+</form>
+</body>
+</html>

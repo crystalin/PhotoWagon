@@ -18,9 +18,25 @@
           #menu
             %ul
               %li= link_to "Accueil", root_path
-              %li= link_to "Derniers Commentaires", comments_path
+              - if missing_photos > 0
+                %li= link_to "Nouvelles photos (#{missing_photos})", beginning_posts_path(:page => last_visited_page)
+              -else
+                %li= link_to "D&#233;but de l'histoire".html_safe, beginning_posts_path
+              %li= link_to "Derniers commentaires", comments_path
+
             .clear
+          -flash.each do |name, msg|
+            =content_tag :div, msg, :id => "flash_#{name}"
+        .clear
         = yield
       #footer
+        #user_nav
+          -if current_user
+            Logged in as #{current_user.email}
+            = link_to "Log out", log_out_path
+          -else
+            = link_to "Sign up", sign_up_path
+            or
+            = link_to "log in", log_in_path
         = render 'layouts/footer'
     = javascript_include_tag :defaults

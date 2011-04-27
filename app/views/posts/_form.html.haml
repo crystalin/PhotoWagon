@@ -1,6 +1,6 @@
 =form_for @post, :html => {:multipart => true} do |form|
   .field
-    =image_tag(@post.image_url(:thumb)) if @post.image_url
+    =image_tag(@post.image_url(:front_page)) if @post.image_url
   .field
     =form.file_field :image
   .buttons

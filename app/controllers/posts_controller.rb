@@ -1,29 +1,52 @@
 class PostsController < ApplicationController
+  before_filter :find_post, :only => :show
+  load_and_authorize_resource
+
   def index
-    @posts = Post.order('published_on desc').includes(:comments).page(params[:page]).per(15)
+    @posts = Post.recent.includes(:comments).page(params[:page]).per(15)
+#    if cookies[:page_counter] > 1
+#      @last_post = @posts.all.first
+#      update_cookie @last_post if @last_post
+#    end
   end
 
+  def beginning
+    @posts = Post.story.includes(:comments).page(params[:page]).per(15)
+    @last_post = @posts.all.last
+    update_cookie @last_post if @last_post
+    render "index"
+  end
+
+#  def recent
+#    if cookies[:last_post_date]
+#      @posts = Post.order('published_on asc').where("published_on > ?", cookies[:last_post_date]).includes(:comments).page(params[:page]).per(15)
+#      update_cookie @posts.last if @posts.last
+#      if @posts.empty?
+#        redirect_to posts_path, :notice => "Vous avez d&#233;j&#224; vu toutes les nouvelles photos".html_safe
+#      else
+#        render "index"
+#      end
+#    else
+#      redirect_to beginning_posts_path, :notice => "Commen&#231;ons par le d&#233;but de l'histoire".html_safe
+#    end
+#  end
+
   def show
-    @post = Post.includes(:comments).find(params[:id])
     @comment = Comment.new
   end
 
   def new
-    @post = Post.new
   end
 
   def create
-    @post = Post.new(params[:post])
     params[:notice] = 'Post was successfully created.' if @post.save
     redirect_to @post
   end
 
   def edit
-    @post = Post.find(params[:id])
   end
 
   def update
-    @post = Post.find(params[:id])
     params[:notice] = 'Post was successfully updated.' if @post.update_attributes(params[:post])
     redirect_to @post
   end
@@ -45,32 +68,19 @@ class PostsController < ApplicationController
 
   def picasa
     if not params['rss']
-      @items = [{
-            "title" => "P1120383.JPG","description" => "Bon... pas directement mais en tout cas, le repas me donne envie d'y aller. Je peux vous assurer que c'est delicieux !!","thumbnail" => "http://localhost:3113/58498d8c858e8448e551fd8fe418487f/thumb/e2f1ad12a9c7187f.jpg","imgsrc"=>"http://localhost:3113/58498d8c858e8448e551fd8fe418487f/image/e2f1ad12a9c7187f.jpg",
-            "group"=>{
-              "content"=>[
-                {"url"=>"http://localhost:3113/58498d8c858e8448e551fd8fe418487f/image/e2f1ad12a9c7187f.jpg","width"=>"3712","height"=>"2088","isDefault"=>"true"},
-                {"url"=>"http://localhost:3113/58498d8c858e8448e551fd8fe418487f/original/e2f1ad12a9c7187f","width"=>"3712","height"=>"2088","fileSize"=>"2864593","type"=>"image/jpeg"}
-              ],
-              "thumbnail"=>{"url"=>:"http://localhost:3113/58498d8c858e8448e551fd8fe418487f/thumb/e2f1ad12a9c7187f.jpg","width"=>"144","height"=>"81"}
-            }
-          },
-          {"title"=>"P1120383.JPG", "description"=>"Bon... pas directement mais en tout cas, le repas me donne envie d'y aller. Je peux vous assurer que c'est delicieux !!", "thumbnail"=>"http://localhost:3113/58498d8c858e8448e551fd8fe418487f/thumb/e2f1ad12a9c7187f.jpg", "imgsrc"=>"http://localhost:3113/58498d8c858e8448e551fd8fe418487f/image/e2f1ad12a9c7187f.jpg", "group"=>{"content"=>[{"url"=>"http://localhost:3113/58498d8c858e8448e551fd8fe418487f/image/e2f1ad12a9c7187f.jpg", "width"=>"3712", "height"=>"2088", "isDefault"=>"true"}, {"url"=>"http://localhost:3113/58498d8c858e8448e551fd8fe418487f/original/e2f1ad12a9c7187f", "width"=>"3712", "height"=>"2088", "fileSize"=>"2864593", "type"=>"image/jpeg"}], "thumbnail"=>{"url"=>"http://localhost:3113/58498d8c858e8448e551fd8fe418487f/thumb/e2f1ad12a9c7187f.jpg", "width"=>"144", "height"=>"81"}}}]
       params[:notice] = 'No Rss Provided'
+      redirect_to root_path
     else
       rss_hash = Hash.from_xml(params['rss'].tempfile)
       @items = rss_hash['rss']['channel']['item']
       if not @items.is_a? Array
         @items = [@items]
       end
-#      puts rss_hash.to_json
-#      puts @items
     end
-    render :layout => false
+#    render :layout => false
   end
 
   def picasa_upload
-#    puts params.to_yaml
     params[:notice] ||= ""
     params.each do |name, uploaded_file|
       if uploaded_file.is_a? ActionDispatch::Http::UploadedFile
@@ -85,5 +95,16 @@ class PostsController < ApplicationController
     render :nothing => true
   end
 
+  private
+  def find_post
+    @post = Post.includes(:comments).find(params[:id])
+  end
+
+  def update_cookie(last_post)
+    if cookies[:last_post_date].nil? || cookies[:last_post_date].empty? || (cookies[:last_post_date].to_time < last_post.published_on)
+      cookies.permanent[:last_post_date] = last_post.published_on
+    end
+
+  end
 
 end

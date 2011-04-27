@@ -1,16 +1,26 @@
 Photowagon::Application.routes.draw do
 
   resources :comments
-
   resources :posts do
     collection do
       get :recreate_images
+#      get :recent
+      get :beginning
     end
+
   end
 
   match "/picasa" => 'posts#picasa'
   match "/picasa_upload" => 'posts#picasa_upload'
   match "/install_picasa" => 'home#install_picasa'
+
+
+  get "log_out" => "sessions#destroy", :as => "log_out"
+  get "log_in" => "sessions#new", :as => "log_in"
+  get "sign_up" => "users#new", :as => "sign_up"
+  get "install" => "users#install", :as => "install"
+  resources :users
+  resources :sessions
 
   root :to => "posts#index"
 
@@ -69,4 +79,6 @@ Photowagon::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
+
+  match '*a', :to => 'errors#routing'
 end
