@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   skip_load_resource :only => :create
 
   def index
-    @comments = Comment.recent.includes(:post => :comments).page(params[:page]).per(15)
+    @comments = Comment.recent.includes(:post => :comments).page(params[:page]).per(30)
   end
 
   def new

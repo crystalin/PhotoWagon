@@ -1,0 +1,14 @@
+#menu
+  %ul
+    %li= link_to "Accueil", root_path
+    - if missing_photos > 0
+      %li= link_to "Nouvelles photos (#{missing_photos})", beginning_posts_path(:page => last_visited_page)
+    -else
+      %li= link_to "D&#233;but de l'histoire".html_safe, beginning_posts_path
+    %li= link_to "Derniers commentaires", comments_path
+    -if controller.class == PostsController && params[:action] == "show"
+      %li= "---"
+      %li= link_to "Photo pr&#233;c&#233;dente".html_safe, @post.previous_post if @post.previous_post
+      %li= link_to "Photo suivante".html_safe, @post.next_post if @post.next_post
+
+  .clear

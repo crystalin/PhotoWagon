@@ -21,4 +21,13 @@ class Post < ActiveRecord::Base
   def information
     @information ||= MiniExiftool.new image.current_path
   end
+
+  def previous_post
+    @previous_post||= self.class.first(:conditions => ["published_on < ?", published_on], :order => "published_on desc")
+  end
+
+  def next_post
+    @next_post||= self.class.first(:conditions => ["published_on > ?", published_on], :order => "published_on asc")
+  end
+
 end

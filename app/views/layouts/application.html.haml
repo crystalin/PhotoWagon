@@ -15,21 +15,13 @@
     #container
       #content
         #header
-          #menu
-            %ul
-              %li= link_to "Accueil", root_path
-              - if missing_photos > 0
-                %li= link_to "Nouvelles photos (#{missing_photos})", beginning_posts_path(:page => last_visited_page)
-              -else
-                %li= link_to "D&#233;but de l'histoire".html_safe, beginning_posts_path
-              %li= link_to "Derniers commentaires", comments_path
-
-            .clear
+          =render "layouts/menu"
           -flash.each do |name, msg|
             =content_tag :div, msg, :id => "flash_#{name}"
         .clear
         = yield
       #footer
+        =render "layouts/menu"
         #user_nav
           -if current_user
             Logged in as #{current_user.email}

@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_filter :find_post, :only => :show
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:picasa, :picasa_upload]
 
   def index
     @posts = Post.recent.includes(:comments).page(params[:page]).per(15)
