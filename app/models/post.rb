@@ -2,6 +2,7 @@ class Post < ActiveRecord::Base
   attr_accessible :image
   mount_uploader :image, ImageUploader
 
+  scope :last, order('id desc')
   scope :recent, order('published_on desc')
   scope :story, order('published_on asc')
 

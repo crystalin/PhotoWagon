@@ -1,13 +1,14 @@
 .post
   .title
     .links
+      %span.link=link_to "Photo grande taille", post.image_url(:full_page), :target => '_blank' if post.image_url
       %span.link=link_to "Lire les commentaires (#{post.comments.count})", "#comments"
       %span.link=link_to "Ecrire un commentaire", "#comments"
     %h2= post.title
     .subtitle= post.published_on.getlocal.strftime("%A %d %B, %Y - %T")
     .clear
   %div{:class => "image " + (post.information["ExifImageWidth"] > post.information["ExifImageHeight"] ? "horizontal" : "vertical")}= image_tag post.image_url(:full_page), :width => "100%" if post.image_url
-  .description= simple_format(post.body)
+  .description= post.body
   .photograph Alan Sap&egrave;de
   .front_comments#comments
     %h3 Commentaires

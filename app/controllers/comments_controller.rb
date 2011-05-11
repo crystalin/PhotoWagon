@@ -2,6 +2,11 @@ class CommentsController < ApplicationController
   load_and_authorize_resource
   skip_load_resource :only => :create
 
+  rescue_from ActiveRecord::RecordInvalid do |exception|
+    flash[:alert] = "Nom ou contenu du commentaire incomplet (minimum 2 caracteres)"
+    redirect_to @post
+  end
+
   def index
     @comments = Comment.recent.includes(:post => :comments).page(params[:page]).per(30)
   end
@@ -13,6 +18,7 @@ class CommentsController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.build(params[:comment])
+    cookies.permanent[:comment_name] = @comment.author if @comment.author
     if @comment.save!
       redirect_to @post, :notice => "Votre commentaire a &#233;t&#233; publi&#233;".html_safe
     else
@@ -27,6 +33,15 @@ class CommentsController < ApplicationController
     else
       flash[:notice]= "Error while editing the comment."
       render @post
+    end
+  end
+
+  def destroy
+    if @comment.delete
+      redirect_to root_url, :notice  => "Successfully deleted comment."
+    else
+      flash[:notice]= "Error while deleting the comment."
+      render @comment
     end
   end
 end

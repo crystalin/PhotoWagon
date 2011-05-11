@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :missing_photos
   helper_method :last_visited_page
+  helper_method :comment_name
 
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -26,6 +27,10 @@ class ApplicationController < ActionController::Base
 
   def last_visited_page
     @last_visited ||= (Post.where("published_on <= ?", cookies[:last_post_date].to_time).count / 15.0).to_f.floor + 1
+  end
+
+  def comment_name
+    @comment_name ||= cookies[:comment_name] if cookies[:comment_name]
   end
 
 end

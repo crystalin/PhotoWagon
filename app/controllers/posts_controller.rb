@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   load_and_authorize_resource :except => [:picasa, :picasa_upload]
 
   def index
-    @posts = Post.recent.includes(:comments).page(params[:page]).per(15)
+    @posts = Post.last.includes(:comments).page(params[:page]).per(15)
 #    if cookies[:page_counter] > 1
 #      @last_post = @posts.all.first
 #      update_cookie @last_post if @last_post
