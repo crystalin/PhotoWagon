@@ -1,12 +1,9 @@
 class PostsController < ApplicationController
   before_filter :find_post, :only => :show
+  load_and_authorize_resource
 
   def index
     @posts = Post.on_site(current_subdomain).recent.includes(:comments).page(params[:page]).per(15)
-#    if cookies[:page_counter] > 1
-#      @last_post = @posts.all.first
-#      update_cookie @last_post if @last_post
-#    end
   end
 
   def beginning
@@ -15,20 +12,6 @@ class PostsController < ApplicationController
     update_cookie @last_post if @last_post
     render "index"
   end
-
-#  def recent
-#    if cookies[:last_post_date]
-#      @posts = Post.order('published_on asc').where("published_on > ?", cookies[:last_post_date]).includes(:comments).page(params[:page]).per(15)
-#      update_cookie @posts.last if @posts.last
-#      if @posts.empty?
-#        redirect_to posts_path, :notice => "Vous avez d&#233;j&#224; vu toutes les nouvelles photos".html_safe
-#      else
-#        render "index"
-#      end
-#    else
-#      redirect_to beginning_posts_path, :notice => "Commen&#231;ons par le d&#233;but de l'histoire".html_safe
-#    end
-#  end
 
   def show
     @comment = Comment.new
