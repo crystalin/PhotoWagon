@@ -1,10 +1,11 @@
 class Post < ActiveRecord::Base
-  attr_accessible :image
+  attr_accessible :image, :site_name
   mount_uploader :image, ImageUploader
 
-  scope :last, order('id desc')
+  scope :latest, order('id desc')
   scope :recent, order('published_on desc')
   scope :story, order('published_on asc')
+  scope :on_site, lambda {|site_name| where("site_name = ?",site_name) if site_name}
 
   before_save :read_information
   has_many :comments
@@ -24,11 +25,11 @@ class Post < ActiveRecord::Base
   end
 
   def previous_post
-    @previous_post||= self.class.first(:conditions => ["published_on < ?", published_on], :order => "published_on desc")
+    @previous_post||= self.class.first(:conditions => ["published_on < ? AND site_name = ?", published_on, site_name], :order => "published_on desc")
   end
 
   def next_post
-    @next_post||= self.class.first(:conditions => ["published_on > ?", published_on], :order => "published_on asc")
+    @next_post||= self.class.first(:conditions => ["published_on > ? AND site_name = ?", published_on, site_name], :order => "published_on asc")
   end
 
 end

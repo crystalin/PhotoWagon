@@ -1,3 +1,14 @@
-%p Voici mon site au Japon que je continue de faire evoluer.
-%p Merci de faire passer le site aux personnes que je connais et &#224; qui je n'ai pas envoy&#233; le lien.
-%p Copyright @ Alan Sap&#232;de
+.link_sites
+  .site= link_to "Lost in Dubai", "http://dubai.crystalin.fr"
+  .site= link_to "Lost in Japon", "http://japon.crystalin.fr"
+  .site= link_to "Lost in Australia", "http://australie.crystalin.fr"
+  .site= link_to "Lost in Singapour", "http://singapour.crystalin.fr"
+%p.clear
+  Copyright @ Alan Sap&#232;de -
+  -if current_user
+    Logged in as #{current_user.email}
+    = link_to "Log out", log_out_path
+  -else
+    = link_to "Sign up", sign_up_path
+    or
+    = link_to "log in", log_in_path

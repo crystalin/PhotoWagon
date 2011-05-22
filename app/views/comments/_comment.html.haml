@@ -7,7 +7,7 @@
     #{comment.author}:
   .content
     = simple_format(comment.content)
-    %span.date= "#{comment.created_at.getlocal.strftime("%k:%m le %d %B")}" if show_date
+    %span.date= "#{comment.created_at.getlocal.strftime("%k:%M le %d %B")}" if show_date
   - if can? :delete, comment
     .buttons
       .button= link_to "delete", {:action => :destroy, :id => comment.id, :controller => :comments} , :confirm => "Are you sure?", :method => :delete

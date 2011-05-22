@@ -1,5 +1,6 @@
 %h2 Picasa Web Upload Page
-%form#picasa_upload{:enctype => "multipart/form-data", :action=>"/picasa_upload", :method => "post"}
+%form#picasa_upload{:enctype => "multipart/form-data", :action=>"/picasa/create", :method => "post"}
+
   - @items.each_with_index do |item, index|
     .third{:class => ("last" if index%3 == 2)}
       .front_post

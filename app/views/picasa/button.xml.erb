@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<buttons format="1" version="1.0">
+	<button id="<%=current_subdomain%>wagon/{<%=@uuid%>}" type="dynamic">
+		<icon name="{<%=@uuid%>}/25x25" src="pbz"/>
+		<label><%=current_subdomain.capitalize%> Wagon</label>
+		<tooltip>Upload to <%=request.host_with_port%> Website</tooltip>
+		<action verb="hybrid">
+			<param name="url" value="http://<%=request.host_with_port%>/picasa/upload"/>
+		</action>
+	</button>
+</buttons>

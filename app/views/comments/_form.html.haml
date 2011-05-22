@@ -1,6 +1,6 @@
 .comment_form
   = form_for @comment do |f|
-    = hidden_field_tag :post_id, @post.id.to_s
+    = hidden_field_tag :post_id, @comment.post.id.to_s
     %p
       = f.label :author, "Votre nom"
       %br

@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
   end
 
   def index
-    @comments = Comment.recent.includes(:post => :comments).page(params[:page]).per(30)
+    @comments = Comment.on_site(current_subdomain).recent.includes(:post => :comments).page(params[:page]).per(30)
   end
 
   def new
@@ -25,6 +25,10 @@ class CommentsController < ApplicationController
       flash[:alert]= "Impossible de cr&#233;er le commentaire".html_safe
       redirect_to @post
     end
+  end
+
+  def edit
+
   end
 
   def update

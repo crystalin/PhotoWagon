@@ -10,9 +10,10 @@ Photowagon::Application.routes.draw do
 
   end
 
-  match "/picasa" => 'posts#picasa'
-  match "/picasa_upload" => 'posts#picasa_upload'
-  match "/install_picasa" => 'home#install_picasa'
+  match "/picasa/upload" => 'picasa#upload'
+  match "/picasa/create" => 'picasa#create'
+  match "/picasa/install" => 'picasa#install'
+  match "/picasa/button" => 'picasa#button'
 
 
   get "log_out" => "sessions#destroy", :as => "log_out"

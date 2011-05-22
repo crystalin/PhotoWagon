@@ -24,6 +24,9 @@ gem 'jquery-rails'
 
 gem "cancan"
 
+gem "uuidtools"
+gem "rubyzip"
+
 group :development do
   gem 'haml-rails'
   gem 'rails3-generators'

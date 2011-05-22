@@ -1,9 +1,8 @@
 class PostsController < ApplicationController
   before_filter :find_post, :only => :show
-  load_and_authorize_resource :except => [:picasa, :picasa_upload]
 
   def index
-    @posts = Post.last.includes(:comments).page(params[:page]).per(15)
+    @posts = Post.on_site(current_subdomain).recent.includes(:comments).page(params[:page]).per(15)
 #    if cookies[:page_counter] > 1
 #      @last_post = @posts.all.first
 #      update_cookie @last_post if @last_post
@@ -11,7 +10,7 @@ class PostsController < ApplicationController
   end
 
   def beginning
-    @posts = Post.story.includes(:comments).page(params[:page]).per(15)
+    @posts = Post.on_site(current_subdomain).story.includes(:comments).page(params[:page]).per(15)
     @last_post = @posts.all.last
     update_cookie @last_post if @last_post
     render "index"
@@ -33,12 +32,14 @@ class PostsController < ApplicationController
 
   def show
     @comment = Comment.new
+    @comment.post = @post
   end
 
   def new
   end
 
   def create
+    @post.update_attribute :site_name, current_subdomain
     params[:notice] = 'Post was successfully created.' if @post.save
     redirect_to @post
   end
@@ -66,43 +67,14 @@ class PostsController < ApplicationController
     redirect_to posts_path
   end
 
-  def picasa
-    if not params['rss']
-      params[:notice] = 'No Rss Provided'
-      redirect_to root_path
-    else
-      rss_hash = Hash.from_xml(params['rss'].tempfile)
-      @items = rss_hash['rss']['channel']['item']
-      if not @items.is_a? Array
-        @items = [@items]
-      end
-    end
-#    render :layout => false
-  end
-
-  def picasa_upload
-    params[:notice] ||= ""
-    params.each do |name, uploaded_file|
-      if uploaded_file.is_a? ActionDispatch::Http::UploadedFile
-        post = Post.new(:image => uploaded_file)
-        if post.save
-          params[:notice] += "#{uploaded_file.original_filename} uploaded.\n "
-        else
-          params[:notice] += "#{uploaded_file.original_filename} FAILED.\n "
-        end
-      end
-    end
-    render :nothing => true
-  end
-
   private
   def find_post
     @post = Post.includes(:comments).find(params[:id])
   end
 
   def update_cookie(last_post)
-    if cookies[:last_post_date].nil? || cookies[:last_post_date].empty? || (cookies[:last_post_date].to_time < last_post.published_on)
-      cookies.permanent[:last_post_date] = last_post.published_on
+    if cookies["last_post_date_#{current_subdomain}"].nil? || cookies["last_post_date_#{current_subdomain}"].empty? || (cookies["last_post_date_#{current_subdomain}"].to_time < last_post.published_on)
+      cookies.permanent["last_post_date_#{current_subdomain}"] = last_post.published_on
     end
 
   end

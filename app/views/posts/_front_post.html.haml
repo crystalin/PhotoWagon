@@ -3,7 +3,7 @@
     %h2.title=link_to front_post.title, front_post
     .subtitle= front_post.published_on.getlocal.strftime("%A %d %B, %Y - %T") if front_post.published_on
     .image=link_to image_tag(front_post.image_url(:front_page)), front_post.image_url(:full_page), :title => front_post.title, :rel => 'front_image', :class => "popup_image"  if front_post.image_url
-    .description= front_post.body
+    .description= front_post.body.html_safe
     .comment_link
       =link_to "Ecrire un commentaire", post_path(front_post, :anchor => "comments")
     .front_comments
