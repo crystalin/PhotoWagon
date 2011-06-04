@@ -12,7 +12,7 @@ Backup::Model.new(:photowagon_backup, 'Photowagon default backup configuration')
   end
 
   archive :shared_assets do |archive|
-    archive.add  <%= shared_path %>
+    archive.add  "/var/www/rails/photowagon/shared"
   end
 
   encrypt_with OpenSSL do |encryption|

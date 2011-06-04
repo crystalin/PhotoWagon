@@ -40,7 +40,7 @@ namespace :deploy do
     run "rvm use ruby-#{rvm_ruby_string} --create"
   end
   task :bundle_gems, :roles => :app do
-    run "cd #{release_path} && bundle install --without development test && rvm rvmrc trust"
+    run "cd #{release_path} && rvm ruby bundle install --without development test && rvm rvmrc trust"
   end
   task :start do ; end
   task :stop do ; end
@@ -70,20 +70,18 @@ set :shared_assets, %w{public/uploads}
 namespace :deploy do
 
   desc "Install gem Whenever"
-  task :install_whenever do
-    run "rvm gem install i18n whenever"
+  task :install_gems do
+    run "rvm gem install i18n whenever bundler"
   end
 
   desc "Update the crontab file"
   task :update_crontab, :roles => :db do
-    template = ERB.new IO.read('backup.rb.erb')
-    File.open('backup.rb', 'w') {|f| f.write(template.result(binding))}
     run "cd #{release_path} && rvm ruby whenever --update-crontab #{application}"
   end
 end
 
 before "deploy", "deploy:create_gemset"
-after "deploy:create_gemset", "deploy:install_whenever"
+after "deploy:create_gemset", "deploy:install_gems"
 before "deploy:setup", "assets:symlinks:setup"
 before "deploy:symlink", "assets:symlinks:update"
 after "deploy", "deploy:bundle_gems"
