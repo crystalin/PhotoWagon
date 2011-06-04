@@ -2,9 +2,7 @@
 
 $:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory to the load path.
 
-set :whenever_command, 'rvm ruby whenever'
-
-set :rvm_ruby_string, '1.9.2-p180@photowagon'        # Or whatever env you want it to run in.
+set :rvm_ruby_string, ''        # Or whatever env you want it to run in.
 #set :rvm_type, :user
 
 set :application, "photowagon"
@@ -37,10 +35,10 @@ require "whenever/capistrano"
 #If you are using Passenger mod_rails uncomment this:
 namespace :deploy do
   task :create_gemset, :roles => :app do
-    run "rvm use ruby-#{rvm_ruby_string} --create"
+    run "rvm use ruby-1.9.2-p180@photowagon --create"
   end
   task :bundle_gems, :roles => :app do
-    run "cd #{release_path} && rvm ruby bundle install --without development test && rvm rvmrc trust"
+    run "cd #{release_path} && bundle install --without development test && rvm rvmrc trust"
   end
   task :start do ; end
   task :stop do ; end
@@ -71,12 +69,12 @@ namespace :deploy do
 
   desc "Install gem Whenever"
   task :install_gems do
-    run "rvm gem install i18n whenever bundler"
+    run "gem install i18n whenever bundler"
   end
 
   desc "Update the crontab file"
   task :update_crontab, :roles => :db do
-    run "cd #{release_path} && rvm ruby whenever --update-crontab #{application}"
+    run "cd #{release_path} && whenever --update-crontab #{application}"
   end
 end
 
