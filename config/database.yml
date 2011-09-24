@@ -1,29 +1,43 @@
 # SQLite version 3.x
 #   gem install sqlite3
 development:
-  adapter: mysql
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
   database: photowagon_development
   username: photowagon
+  password: 46ef6549azfcqs!azf98!??!
   pool: 5
   timeout: 5000
+  socket: /var/run/mysqld/mysqld.sock
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test: &test
-  adapter: mysql
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
   database: photowagon_test
   username: photowagon
+  password: 46ef6549azfcqs!azf98!??!
   pool: 5
   timeout: 5000
+  socket: /var/run/mysqld/mysqld.sock
 
-production:
-  adapter: mysql
+production: &PROD
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
   database: photowagon
   username: photowagon
-  password: yaTggoaw!3d!a
+  password: yaTgqs!azf98!?goaw!3d!a
   pool: 5
   timeout: 5000
+  socket: /var/run/mysqld/mysqld.sock
+
+staging:
+  <<: *PROD
 
 cucumber:
   <<: *test

@@ -1,0 +1,13 @@
+
+body.japon {
+  background:  asset_url('japon/bg.jpg','images') no-repeat top center white;
+
+  #content {
+    background:  asset_url('japon/container-bg.png','images');
+    min-height: 600px;
+  }
+
+  #footer {
+    background:  asset_url('footer-bg.png','images') repeat-x white;
+  }
+}

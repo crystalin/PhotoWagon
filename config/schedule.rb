@@ -1,3 +1,4 @@
-every 1.day do
-  rake "backup:run trigger='photowagon_backup'"
+every 1.month do
+  rake "db:backup"
+  rake "sitemap:refresh"
 end

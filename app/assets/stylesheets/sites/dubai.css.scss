@@ -1,0 +1,17 @@
+
+body.dubai {
+  background:  asset_url('dubai/bg.gif','images') repeat #FDA;
+
+  #content {
+    background:  asset_url('dubai/bg-inside.gif','images');
+    min-height: 1000px;
+  }
+
+  #footer {
+  }
+
+ #background {
+   background:  asset_url('dubai/background.png','images') no-repeat top center;
+   height: 1098px;
+ }
+}

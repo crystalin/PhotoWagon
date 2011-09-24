@@ -1,8 +1,27 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+
+ *= depend_on base.css
+ *= depend_on colorbox.css
+ *= depend_on pagination.css
+ *= depend_on percents.css
+ *= depend_on sites/dubai.css
+ *= depend_on sites/france.css
+ *= depend_on sites/japon.css
+*/
+
+
+@import "compass";
+@import "blueprint";
+
 // This import applies a global reset to any page that imports this stylesheet.
 @import "blueprint/reset";
 
 // To configure blueprint, edit the partials/base.sass file.
-@import "partials/base";
+@import "base";
 
 // Import all the default blueprint modules so that we can access their mixins.
 @import "blueprint";
@@ -21,9 +40,9 @@
 // when stylesheets are concatenated together.
 @include blueprint-scaffolding("body.bp");
 
-@import "partials/colorbox";
-@import "partials/pagination";
-@import "partials/percents";
+@import "colorbox";
+@import "pagination";
+@import "percents";
 
 body.bp {
   @include blueprint-typography(true);
@@ -127,6 +146,8 @@ h2 {
     text-align: center;
     img {
       border: 2px solid #000;
+      width: 300px;
+      height: 168px;
     }
   }
   .description {
@@ -331,3 +352,4 @@ a, a:visited {
 
 @import "sites/japon";
 @import "sites/dubai";
+@import "sites/france";

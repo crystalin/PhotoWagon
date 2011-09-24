@@ -1,22 +1,30 @@
 source 'http://rubygems.org'
 
-gem 'rails'
+gem 'rails', "3.1.0"
+gem 'rake', "0.8.7"
 
-gem 'mysql'
+gem 'mysql2'
+
+gem 'therubyracer', :platforms => :ruby_19
+gem 'execjs'
 
 gem 'compass'
 gem 'compass-960-plugin'
 gem 'haml'
 
-gem "rmagick", :platforms => :ruby
 
 gem 'carrierwave'
+gem 'RubyInline'
+gem 'mini_magick'
 
 gem 'mini_exiftool', :platforms => :ruby
 
 gem "bcrypt-ruby", :require => "bcrypt"
 
-#gem 'stalker'  // not yet
+
+gem 'backup'
+gem 'backup-task'
+gem 'net-sftp', '~> 2.0.5'
 
 gem 'kaminari'
 
@@ -27,14 +35,26 @@ gem "cancan"
 gem "uuidtools"
 gem "rubyzip"
 
+gem 'whenever'
+
+gem 'unicorn'
+
+gem 'sitemap_generator'
+
+gem 'sass-rails'
+
+group :assets do
+  gem 'coffee-rails'
+  gem 'uglifier'
+  gem 'ansi'
+end
+
 group :development do
   gem 'haml-rails'
-  gem 'rails3-generators'
   gem 'capistrano'
-  gem 'whenever'
+  gem 'capistrano-ext'
   gem "nifty-generators"
   gem 'hpricot', :platforms => :ruby
-#  gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git', :require => 'rails_development_boost'
 end
 
 group :test do

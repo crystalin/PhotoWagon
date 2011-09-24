@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_subdomain
-    @subdomain ||= request.subdomain if request.subdomain.present?
+    @subdomain ||= request.subdomain.presence || "japon"
   end
 
   def restore_cookies
