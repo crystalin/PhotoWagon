@@ -10,5 +10,5 @@ class Comment < ActiveRecord::Base
   validates_length_of :content, :minimum => 2
 
   scope :recent, order("created_at DESC")
-  scope :on_site, lambda {|site_name| joins(:post) & Post.on_site(site_name) if site_name}
+  scope :on_site, lambda {|site_name| joins(:post).merge(Post.on_site(site_name)) if site_name}
 end
