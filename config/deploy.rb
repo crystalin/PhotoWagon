@@ -13,7 +13,8 @@ require 'capistrano/ext/multistage'
 set :application,     "photowagon"
 set :shared_assets,   %w{public/uploads}
 
-ssh_options[:forward_agent] = true
+set :ssh_options, { :forward_agent => true, :keys_only => false, :paranoid => false, :verbose => Logger::DEBUG  }
+set :keys_only, true
 
 depend :local, :command, "git"
 depend :local, :command, "mysqld" #mysqld
@@ -23,7 +24,7 @@ depend :local, :command, "exiftool" #libimage-exiftool-perl
 
 set :user, "deployer"
 set :group, "staff"
-set :scm_username, "crystalin"
+#set :scm_username, "crystalin"
 
 set :scm,             :git
 set :rvm_type,        :user
@@ -206,7 +207,7 @@ namespace :nginx do
     template = File.read(File.join(File.dirname(__FILE__), "deploy", "#{application}.nginx.conf.erb"))
     result = ERB.new(template).result(binding)
 
-    put result, "#{current_path}/config/deploy/#{domain}", :mode => 0644
+    put result, "#{current_path}/config/deploy/#{domain.split(' ').first}", :mode => 0644
   end
 
 end
