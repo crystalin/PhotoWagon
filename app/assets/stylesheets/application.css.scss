@@ -21,7 +21,7 @@
 @import "blueprint/reset";
 
 // To configure blueprint, edit the partials/base.sass file.
-@import "base";
+@import "base.css.scss";
 
 // Import all the default blueprint modules so that we can access their mixins.
 @import "blueprint";
@@ -40,9 +40,9 @@
 // when stylesheets are concatenated together.
 @include blueprint-scaffolding("body.bp");
 
-@import "colorbox";
-@import "pagination";
-@import "percents";
+@import "colorbox.css.scss";
+@import "pagination.css.scss";
+@import "percents.css.scss";
 
 body.bp {
   @include blueprint-typography(true);
@@ -350,6 +350,6 @@ a, a:visited {
 }
 
 
-@import "sites/japon";
-@import "sites/dubai";
-@import "sites/france";
+@import "sites/japon.css.scss";
+@import "sites/dubai.css.scss";
+@import "sites/france.css.scss";
