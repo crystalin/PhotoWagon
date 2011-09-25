@@ -4,7 +4,7 @@
   SitemapGenerator::Sitemap.create do
 
     Post.on_site(subdomain).each do |post|
-      add post_path(post), :Lastmod => post.updated_at
+      add post_path(post), :lastmod => post.updated_at
     end
   end
 end
