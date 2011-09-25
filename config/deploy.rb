@@ -13,13 +13,16 @@ require 'capistrano/ext/multistage'
 set :application,     "photowagon"
 set :shared_assets,   %w{public/uploads}
 
+ssh_options[:forward_agent] = true
+
 depend :local, :command, "git"
 depend :local, :command, "mysqld" #mysqld
 depend :local, :command, "identify"
 depend :local, :command, "exiftool" #libimage-exiftool-perl
 #############################
 
-set :user, "crystalin"
+set :user, "deployer"
+set :group, "staff"
 set :scm_username, "crystalin"
 
 set :scm,             :git
