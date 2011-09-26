@@ -1,4 +1,6 @@
-Rails.configuration.sass.tap do |config|
- config.load_paths << "#{Gem.loaded_specs['compass'].full_gem_path}/frameworks/compass/stylesheets"
- config.load_paths << "#{Gem.loaded_specs['compass'].full_gem_path}/frameworks/blueprint/stylesheets"
+if Rails.configuration.respond_to?(:sass)
+  Rails.configuration.sass.tap do |config|
+    config.load_paths << "#{Gem.loaded_specs['compass'].full_gem_path}/frameworks/compass/stylesheets"
+    config.load_paths << "#{Gem.loaded_specs['compass'].full_gem_path}/frameworks/blueprint/stylesheets"
+  end
 end
