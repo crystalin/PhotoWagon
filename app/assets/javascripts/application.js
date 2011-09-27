@@ -8,3 +8,14 @@
 //= require jquery_ujs
 //= require jquery.colorbox
 //= require_tree .
+
+
+$(document).ready(function() {
+  $("a.popup_image").colorbox({maxWidth:'100%', maxHeight:'100%'});
+  $(".horizontal").click(function() {
+    $(this).toggleClass('horizontal').toggleClass('full');
+  });
+  $(".vertical").click(function() {
+    $(this).toggleClass('vertical').toggleClass('full');
+  });
+});
