@@ -8,8 +8,6 @@ gem 'mysql'
 gem 'therubyracer', :platforms => :ruby_19
 gem 'execjs'
 
-gem 'compass'
-gem 'compass-960-plugin'
 gem 'haml'
 
 
@@ -41,9 +39,11 @@ gem 'unicorn'
 
 gem 'sitemap_generator'
 
-gem 'sass-rails'
 
 group :assets do
+  gem 'compass'
+  gem 'compass-960-plugin'
+  gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
   gem 'ansi'
