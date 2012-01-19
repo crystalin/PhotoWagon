@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
 
   def create
     flash[:alert]= "Posting is disabled".html_safe
-    redirect_to @post
+    redirect_to root_url
     #@post = Post.find(params[:post_id])
     #@comment = @post.comments.build(params[:comment])
     #cookies.permanent[:comment_name] = @comment.author if @comment.author
