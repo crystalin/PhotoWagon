@@ -16,15 +16,17 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @post = Post.find(params[:post_id])
-    @comment = @post.comments.build(params[:comment])
-    cookies.permanent[:comment_name] = @comment.author if @comment.author
-    if @comment.save!
-      redirect_to @post, :notice => "Votre commentaire a &#233;t&#233; publi&#233;".html_safe
-    else
-      flash[:alert]= "Impossible de cr&#233;er le commentaire".html_safe
-      redirect_to @post
-    end
+    flash[:alert]= "Posting is disabled".html_safe
+    redirect_to @post
+    #@post = Post.find(params[:post_id])
+    #@comment = @post.comments.build(params[:comment])
+    #cookies.permanent[:comment_name] = @comment.author if @comment.author
+    #if @comment.save!
+    #  redirect_to @post, :notice => "Votre commentaire a &#233;t&#233; publi&#233;".html_safe
+    #else
+    #  flash[:alert]= "Impossible de cr&#233;er le commentaire".html_safe
+    #  redirect_to @post
+    #end
   end
 
   def edit
