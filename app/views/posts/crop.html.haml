@@ -1,0 +1,8 @@
+.cover_post
+  .image= image_tag @posts.first.image_url(:cover) if @posts.first
+= paginate @posts, :inner_window => 10, :outer_window => 3
+%h1 Cropping mode
+.clear
+=render :partial => "front_post_crop", :collection => @posts
+.clear
+= paginate @posts, :inner_window => 10, :outer_window => 3

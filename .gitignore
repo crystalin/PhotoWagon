@@ -5,3 +5,7 @@ tmp/
 .idea
 public/stylesheets
 public/assets
+public/uploads
+.sass-cache
+photowagon.sql
+uploads.tar.gz

@@ -1,0 +1,13 @@
+.third{:class => ("last" if front_post_crop_counter%3 == 2)}
+  .front_post
+    %h2.title=link_to front_post_crop.title, front_post_crop
+    .subtitle= front_post_crop.published_on.getlocal.strftime("%A %d %B, %Y - %T") if front_post_crop.published_on
+    %canvas{:class => "crop_canvas", :width => "300", :height => "168"}
+      =front_post_crop.image_url(:full_page)
+    .description= front_post_crop.body.html_safe
+    .comment_link
+      =link_to "Ecrire un commentaire", post_path(front_post_crop, :anchor => "comments")
+    .front_comments
+      =render :partial => "comments/comment", :collection => front_post_crop.comments if not front_post_crop.comments.empty?
+-if front_post_crop_counter%3 == 2
+  .clear

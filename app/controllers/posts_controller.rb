@@ -4,6 +4,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.on_site(current_subdomain).recent.includes(:comments).page(params[:page]).per(15)
+    render :crop if current_user and current_user.role? :admin
   end
 
   def beginning

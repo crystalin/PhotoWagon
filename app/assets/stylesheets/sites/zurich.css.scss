@@ -1,0 +1,39 @@
+
+body.zurich {
+  background:  asset_url('zurich/bg.jpg','images') repeat #2b1817;
+
+  #container {
+    background:  asset_url('zurich/bg-inside.jpg','images');
+  }
+  #content {
+    min-height: 1000px;
+  }
+
+  #footer {
+    font: bold 11px arial, helvetica, sans-serif;
+  }
+
+ #background {
+   background:  asset_url('zurich/background.png','images') no-repeat top center;
+   height: 1098px;
+ }
+
+ a, a:visited {
+   color: #ABA;
+ }
+
+ .site {
+   background-color: #763d3c;
+   border-color: #AA5556;
+
+ }
+
+ h2 {
+   color: #ba6158;
+ }
+
+ color: #ccc;
+ hr {
+   background-color: #ccc;
+ }
+}

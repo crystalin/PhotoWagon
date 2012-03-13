@@ -1,5 +1,5 @@
 server 'japon.crystalin.fr', :app, :web, :db, :primary => true
-set :domain, "japon.crystalin.fr dubai.crystalin.fr"
+set :domain, "japon.crystalin.fr dubai.crystalin.fr zurich.crystalin.fr"
 set :rails_env, "production"
 set :backup_server, "backup.crystalin.fr"
 

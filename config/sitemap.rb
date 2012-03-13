@@ -1,4 +1,4 @@
-%w(dubai japon).each do |subdomain|
+%w(dubai japon zurich).each do |subdomain|
   SitemapGenerator::Sitemap.default_host = "http://#{subdomain}.crystalin.fr"
   SitemapGenerator::Sitemap.sitemaps_path = "sitemaps/#{subdomain}"
   SitemapGenerator::Sitemap.create do

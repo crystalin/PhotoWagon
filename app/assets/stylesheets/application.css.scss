@@ -9,7 +9,7 @@
  *= depend_on pagination.css
  *= depend_on percents.css
  *= depend_on sites/dubai.css
- *= depend_on sites/france.css
+ *= depend_on sites/zurich.css
  *= depend_on sites/japon.css
 */
 
@@ -38,7 +38,7 @@
 // But Compass recommends that you scope your blueprint styles
 // So that you can better control what pages use blueprint
 // when stylesheets are concatenated together.
-@include blueprint-scaffolding("body.bp");
+@include blueprint-scaffolding;
 
 @import "colorbox.css.scss";
 @import "pagination.css.scss";
@@ -352,4 +352,4 @@ a, a:visited {
 
 @import "sites/japon.css.scss";
 @import "sites/dubai.css.scss";
-/*@import "sites/france.css.scss";*/
+@import "sites/zurich.css.scss";

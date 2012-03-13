@@ -3,7 +3,7 @@
   %head
     %title= "Lost in #{current_subdomain.capitalize}, by Alan"
     = csrf_meta_tag
-    %link{:rel => 'shortcut icon', :href => asset_path("#{current_subdomain}/favicon.png","image"), :type => 'image/png'}
+    %link{:rel => 'shortcut icon', :href => image_path("#{current_subdomain}/favicon.png"), :type => 'image/png'}
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     /[if lt IE 8]

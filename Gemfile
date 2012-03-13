@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
-gem 'rails', "3.1.0"
-gem 'rake', "0.8.7"
+gem 'rails', "3.2.2"
+gem 'rake'
 
 gem 'mysql'
 
@@ -10,6 +10,7 @@ gem 'execjs'
 
 gem 'haml'
 
+gem 'newrelic_rpm'
 
 gem 'carrierwave'
 gem 'RubyInline'
@@ -41,9 +42,8 @@ gem 'sitemap_generator'
 
 
 group :assets do
-  gem 'compass'
-  gem 'compass-960-plugin'
   gem 'sass-rails'
+  gem 'compass'
   gem 'coffee-rails'
   gem 'uglifier'
   gem 'ansi'
