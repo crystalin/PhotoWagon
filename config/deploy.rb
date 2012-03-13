@@ -89,7 +89,7 @@ namespace :deploy do
     run "git clone #{repository} #{current_path}"
   end
 
-  task :symlink, :except => { :no_release => true } do
+  task :create_symlink, :except => { :no_release => true } do
   end
 
   desc "Update the deployed code."
