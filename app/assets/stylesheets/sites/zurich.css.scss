@@ -3,6 +3,7 @@ body.zurich {
   background:  asset_url('zurich/bg.jpg','images') repeat #2b1817;
 
   #container {
+    border-color: #e0745f;
     background:  asset_url('zurich/bg-inside.jpg','images');
   }
   #content {
@@ -11,6 +12,11 @@ body.zurich {
 
   #footer {
     font: bold 11px arial, helvetica, sans-serif;
+    border-color: #e0745f;
+  }
+
+   #menu {
+    border-color: #e0745f;
   }
 
  #background {
@@ -19,11 +25,11 @@ body.zurich {
  }
 
  a, a:visited {
-   color: #ABA;
+   color: #e0745f;
  }
 
  .site {
-   background-color: #763d3c;
+   background-color: #422323;
    border-color: #AA5556;
 
  }
