@@ -17,16 +17,16 @@ ActiveRecord::Schema.define(:version => 20110520203724) do
     t.integer  "post_id"
     t.string   "author"
     t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.text     "body"
     t.datetime "published_on"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.string   "image"
     t.string   "site_name"
   end
@@ -35,8 +35,8 @@ ActiveRecord::Schema.define(:version => 20110520203724) do
     t.string   "email"
     t.string   "password_hash"
     t.string   "password_salt"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.string   "role"
     t.string   "name"
   end

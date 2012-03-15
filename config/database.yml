@@ -5,7 +5,6 @@ development:
   reconnect: false
   database: photowagon_development
   username: photowagon
-  password: 46ef6549azfcqs!azf98!??!
   pool: 5
   timeout: 5000
   socket: /var/run/mysqld/mysqld.sock
@@ -18,7 +17,6 @@ test: &test
   reconnect: false
   database: photowagon_test
   username: photowagon
-  password: 46ef6549azfcqs!azf98!??!
   pool: 5
   timeout: 5000
   socket: /var/run/mysqld/mysqld.sock

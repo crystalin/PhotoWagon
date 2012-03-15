@@ -33,7 +33,9 @@ class PicasaController < ApplicationController
       params[:notice] = 'No Rss Provided'
       redirect_to root_path
     else
-      rss_hash = Hash.from_xml(params['rss'].tempfile)
+      logger.debug params["rss"].inspect
+      content = params['rss']["tempfile"] || params['rss'] ;
+      rss_hash = Hash.from_xml(content)
       @items = rss_hash['rss']['channel']['item']
       if not @items.is_a? Array
         @items = [@items]
