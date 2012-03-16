@@ -1,6 +1,18 @@
 // Active Admin CSS Styles
 @import "active_admin/mixins";
 @import "active_admin/base";
+@import "jquery.Jcrop";
 
 // To customize the Active Admin interfaces, add your
 // styles here:
+
+.post_image {
+  float: left;
+  margin: 5px;
+}
+
+.preview {
+  width:360px;
+  height:168px;
+  overflow:hidden;
+}
