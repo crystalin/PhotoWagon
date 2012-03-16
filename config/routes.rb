@@ -1,5 +1,9 @@
 Photowagon::Application.routes.draw do
 
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
   resources :comments
   resources :posts do
     collection do
@@ -20,8 +24,6 @@ Photowagon::Application.routes.draw do
   get "log_in" => "sessions#new", :as => "log_in"
   get "sign_up" => "users#new", :as => "sign_up"
   get "install" => "users#install", :as => "install"
-  resources :users
-  resources :sessions
 
   root :to => "posts#index"
 

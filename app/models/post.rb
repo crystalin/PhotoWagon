@@ -13,8 +13,8 @@ class Post < ActiveRecord::Base
   def read_information
     @information = nil
     if image != nil
-      self.title = information['Headline'] || 'No title'
-      self.body = information['Caption-Abstract'] || 'No Legend'
+      self.title = information['Headline'] || information['Title'] || 'No title'
+      self.body = information['Caption-Abstract'] || information['ImageDescription'] || 'No Legend'
       self.published_on = information['DateTimeOriginal'] || information['CreateDate'] ||Time.now
 #      puts "#{information['DateTimeOriginal'].class.name} : #{information['DateTimeOriginal']}"
     end

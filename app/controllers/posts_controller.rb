@@ -1,10 +1,7 @@
 class PostsController < ApplicationController
-  before_filter :find_post, :only => :show
-  load_and_authorize_resource
 
   def index
     @posts = Post.on_site(current_subdomain).recent.includes(:comments).page(params[:page]).per(15)
-    render :crop if current_user and current_user.role? :admin
   end
 
   def beginning
@@ -15,7 +12,9 @@ class PostsController < ApplicationController
   end
 
   def show
+    @post = Post.includes(:comments).find(params[:id])
     @comment = Comment.new
+    @comment.post = @post
     @comment.post = @post
   end
 
@@ -23,22 +22,26 @@ class PostsController < ApplicationController
   end
 
   def create
+    @post = Post.new(params[:post])
     @post.update_attribute :site_name, current_subdomain
     params[:notice] = 'Post was successfully created.' if @post.save
     redirect_to @post
   end
 
   def edit
+    @post = Post.find(params[:id])
   end
 
   def update
+    @post = Post.find(params[:id])
     params[:notice] = 'Post was successfully updated.' if @post.update_attributes(params[:post])
     redirect_to @post
   end
 
   def destroy
+    @post = Post.find(params[:id])
     if @post.destroy!
-      params[:notice] = 'Memorial was successfully deleted.'
+      params[:notice] = 'Post was successfully deleted.'
       @post.remove_image!
     end
     redirect_to posts_path
@@ -52,9 +55,6 @@ class PostsController < ApplicationController
   end
 
   private
-  def find_post
-    @post = Post.includes(:comments).find(params[:id])
-  end
 
   def update_cookie(last_post)
     if cookies["last_post_date_#{current_subdomain}"].nil? || cookies["last_post_date_#{current_subdomain}"].empty? || (cookies["last_post_date_#{current_subdomain}"].to_time < last_post.published_on)

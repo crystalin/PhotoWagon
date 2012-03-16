@@ -29,14 +29,15 @@ gem 'kaminari'
 
 gem 'jquery-rails'
 
-gem "cancan"
-
 gem "uuidtools"
 gem "rubyzip"
 
 gem 'whenever'
 
 gem 'unicorn'
+
+gem 'activeadmin'
+gem "meta_search",    '>= 1.1.0.pre'
 
 gem 'sitemap_generator'
 

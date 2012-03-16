@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-  load_and_authorize_resource
   skip_load_resource :only => :create
 
   rescue_from ActiveRecord::RecordInvalid do |exception|
@@ -12,10 +11,12 @@ class CommentsController < ApplicationController
   end
 
   def new
+    @comment = Comment.new(params[:comment])
     redirect_to root_url, :notice => "Pour ecrire un commentaire, merci d'aller sur la page de la photo d'abord"
   end
 
   def create
+    @comment = Comment.new(params[:comment])
     flash[:alert]= "Posting is disabled".html_safe
     redirect_to root_url
     #@post = Post.find(params[:post_id])
@@ -30,10 +31,11 @@ class CommentsController < ApplicationController
   end
 
   def edit
-
+    @comment = Comment.find(params[:id])
   end
 
   def update
+    @comment = Comment.find(params[:id])
     if @comment.update_attributes(params[:comment])
       redirect_to root_url, :notice  => "Successfully updated comment."
     else
@@ -43,6 +45,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    @comment = Comment.find(params[:id])
     if @comment.delete
       redirect_to root_url, :notice  => "Successfully deleted comment."
     else

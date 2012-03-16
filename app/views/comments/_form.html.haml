@@ -4,7 +4,7 @@
     %p
       = f.label :author, "Votre nom"
       %br
-      = f.text_field :author, :value => @comment.author || (current_user ? current_user.name : nil) ||  comment_name
+      = f.text_field :author, :value => @comment.author ||  comment_name
     %p
       = f.label :content, "Commentaire"
       %br
