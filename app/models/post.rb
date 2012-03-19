@@ -1,5 +1,8 @@
 class Post < ActiveRecord::Base
   attr_accessible :image, :site_name
+  attr_accessor :crop_cover_x, :crop_cover_y, :crop_cover_w, :crop_cover_h
+  attr_accessible :crop_cover_x, :crop_cover_y, :crop_cover_w, :crop_cover_h
+
   mount_uploader :image, ImageUploader
 
   scope :latest, order('id desc')

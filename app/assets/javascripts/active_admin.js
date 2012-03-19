@@ -25,8 +25,8 @@ function update_crop(coords) {
       marginLeft: '-' + Math.round(rx * coords.x) + 'px',
       marginTop: '-' + Math.round(ry * coords.y) + 'px'
     });
-//  $("#crop_x").val(Math.round(coords.x * ratio));
-//  $("#crop_y").val(Math.round(coords.y * ratio));
-//  $("#crop_w").val(Math.round(coords.w * ratio));
-//  $("#crop_h").val(Math.round(coords.h * ratio));
+    $("#crop_cover_x").val(Math.round(coords.x));
+    $("#crop_cover_y").val(Math.round(coords.y));
+    $("#crop_cover_w").val(Math.round(coords.w));
+    $("#crop_cover_h").val(Math.round(coords.h));
 }

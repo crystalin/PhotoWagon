@@ -15,17 +15,28 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   version :front_page do
+    process :manual_crop
     process :resize_to_fill => [300, 168]
     process :quality => 80
   end
 
   version :cover do
+    #process :manual_crop => [model.crop_cover_x.to_i,model.crop_cover_y.to_i,model.crop_cover_h.to_i,model.crop_cover_w.to_i] if model.crop_cover_w
     process :resize_to_fill => [972, 240]
     process :quality => 80
   end
 
   def extension_white_list
      %w(jpg jpeg)
+  end
+
+  def manual_crop
+    return unless model.crop_cover_w
+    manipulate! do |img|
+      puts "#{model.crop_cover_w}x#{model.crop_cover_h}+#{model.crop_cover_x}+#{model.crop_cover_y}"
+      img.crop "#{model.crop_cover_w}x#{model.crop_cover_h}+#{model.crop_cover_x}+#{model.crop_cover_y}"
+      img
+    end
   end
 
 end
