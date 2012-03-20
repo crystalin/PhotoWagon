@@ -13,15 +13,18 @@ ActiveAdmin.register Post do
   show do
     h3 post.title
     div do
-      post.body
+      post.crop_cover_x
     end
     div do
       form_for post, :as => :post, :method => :get, :url => {:action => :crop_cover} do |f|
         inputs = ""
-        for attribute in [:crop_cover_x, :crop_cover_y, :crop_cover_h, :crop_cover_w]
-          inputs << f.hidden_field(attribute, :id => attribute)
-        end
-        inputs << hidden_field_tag(:body)
+        #for attribute in [:crop_cover_x, :crop_cover_y, :crop_cover_h, :crop_cover_w]
+        #  inputs << f.hidden_field(attribute, :id => attribute)
+        #end
+        inputs << f.hidden_field(:crop_cover_x, :value => post.crop_cover_x || 0)
+        inputs << f.hidden_field(:crop_cover_y, :value => post.crop_cover_y || 0)
+        inputs << f.hidden_field(:crop_cover_w, :value => post.crop_cover_w || post.information["ImageWidth"])
+        inputs << f.hidden_field(:crop_cover_h, :value => post.crop_cover_h || post.information["ImageWidth"] / ImageUploader::IMAGE_SIZES[:front_page][0] * ImageUploader::IMAGE_SIZES[:front_page][1])
         inputs << f.submit("Crop")
         inputs.html_safe
       end
@@ -46,10 +49,10 @@ ActiveAdmin.register Post do
 
   member_action :crop_cover do
     post = Post.find(params[:id])
-    post.crop_cover_x = params[:post]["crop_cover_x"]
-    post.crop_cover_y = params[:post]["crop_cover_y"]
-    post.crop_cover_h = params[:post]["crop_cover_h"]
-    post.crop_cover_w = params[:post]["crop_cover_w"]
+    post.crop_cover_x = params[:post]["crop_cover_x"].to_i
+    post.crop_cover_y = params[:post]["crop_cover_y"].to_i
+    post.crop_cover_h = params[:post]["crop_cover_h"].to_i
+    post.crop_cover_w = params[:post]["crop_cover_w"].to_i
     post.image.recreate_versions!
     post.save!
     redirect_to :action => :show, :notice => "Image cropped"
