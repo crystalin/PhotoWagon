@@ -21,13 +21,13 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   version :front_page do
-    process :manual_crop
+    process :manual_crop => :front
     process :resize_to_fill => IMAGE_SIZES[:front_page]
     process :quality => 80
   end
 
   version :cover do
-    #process :manual_crop => [model.crop_cover_x.to_i,model.crop_cover_y.to_i,model.crop_cover_h.to_i,model.crop_cover_w.to_i] if model.crop_cover_w
+    process :manual_crop => :cover
     process :resize_to_fill => IMAGE_SIZES[:cover]
     process :quality => 80
   end
@@ -36,11 +36,13 @@ class ImageUploader < CarrierWave::Uploader::Base
      %w(jpg jpeg)
   end
 
-  def manual_crop
-    return unless model.crop_cover_w
+  def manual_crop(thumb)
     manipulate! do |img|
-      puts "#{model.crop_cover_w}x#{model.crop_cover_h}+#{model.crop_cover_x}+#{model.crop_cover_y}"
-      img.crop "#{model.crop_cover_w}x#{model.crop_cover_h}+#{model.crop_cover_x}+#{model.crop_cover_y}"
+      if thumb == :cover
+        img.crop "#{model.crop_cover_w}x#{model.crop_cover_h}+#{model.crop_cover_x}+#{model.crop_cover_y}"
+      else
+        img.crop "#{model.crop_front_w}x#{model.crop_front_h}+#{model.crop_front_x}+#{model.crop_front_y}"
+      end
       img
     end
   end

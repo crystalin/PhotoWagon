@@ -1,5 +1,7 @@
 class Post < ActiveRecord::Base
   attr_accessible :image, :site_name
+  attr_accessible :crop_front_x, :crop_front_y, :crop_front_w, :crop_front_h
+  attr_accessible :good_cover, :crop_cover_x, :crop_cover_y, :crop_cover_w, :crop_cover_h
 
   mount_uploader :image, ImageUploader
 

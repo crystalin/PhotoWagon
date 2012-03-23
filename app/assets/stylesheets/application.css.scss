@@ -17,6 +17,8 @@
 @import "compass";
 @import "blueprint";
 
+@import "jquery.Jcrop";
+
 // This import applies a global reset to any page that imports this stylesheet.
 @import "blueprint/reset";
 
@@ -347,6 +349,13 @@ a, a:visited {
     background-color: #FFC;
     @include border-radius(5px);
   }
+}
+
+
+.crop_preview {
+  width:360px;
+  height:168px;
+  overflow:hidden;
 }
 
 

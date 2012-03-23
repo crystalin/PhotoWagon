@@ -30,8 +30,9 @@ class PicasaController < ApplicationController
 
   def upload
     if not params['rss']
-      params[:notice] = 'No Rss Provided'
-      redirect_to root_path
+      #params[:notice] = 'No Rss Provided'
+      #redirect_to root_path
+      @items = [{ "imgsrc" => Post.last.image_url}]
     else
       logger.debug params["rss"].inspect
       content = params['rss']["tempfile"] || params['rss'] ;

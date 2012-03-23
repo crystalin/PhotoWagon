@@ -11,8 +11,23 @@
   margin: 5px;
 }
 
-.preview {
-  width:360px;
-  height:168px;
-  overflow:hidden;
+
+.picasa_upload {
+  min-width: 1400px;
+}
+.picasa_post_front, .picasa_post_cover {
+  clear: both;
+  .image {
+    margin: 10px;
+    float: left;
+    border-right: 2px solid #79F;
+    padding-right: 10px;
+  }
+  .crop_canvas {
+    margin: 10px;
+  }
+}
+
+.clear {
+  clear: both;
 }

@@ -9,6 +9,7 @@
 //= require jquery.colorbox
 //= require crop_photos
 //= require_tree .
+//= require jquery.Jcrop
 
 
 $(document).ready(function() {

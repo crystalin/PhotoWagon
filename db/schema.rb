@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120319184021) do
+ActiveRecord::Schema.define(:version => 20120323080604) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -66,6 +66,11 @@ ActiveRecord::Schema.define(:version => 20120319184021) do
     t.integer  "crop_cover_y"
     t.integer  "crop_cover_w"
     t.integer  "crop_cover_h"
+    t.boolean  "good_cover"
+    t.integer  "crop_front_x"
+    t.integer  "crop_front_y"
+    t.integer  "crop_front_w"
+    t.integer  "crop_front_h"
   end
 
 end

@@ -1,10 +1,15 @@
 %h2 Picasa Web Upload Page
 %form#picasa_upload{:enctype => "multipart/form-data", :action=>"/picasa/create", :method => "post"}
-
   - @items.each_with_index do |item, index|
     .third{:class => ("last" if index%3 == 2)}
-      .front_post
-        .image= image_tag "#{item['thumbnail']}"
+      .et
+        .image= image_tag "#{item['imgsrc']}?size=300", :id => 'cropbox'
         =hidden_field_tag "#{item['imgsrc']}?size=1600"
+        =hidden_field_tag "post_crop_cover_x", 0
+        =hidden_field_tag "post_crop_cover_y", 0
+        =hidden_field_tag "post_crop_cover_w", 1600
+        =hidden_field_tag "post_crop_cover_h", 840
+      .crop_preview
+        =image_tag "#{item['imgsrc']}?size=300"
   .buttons.clear
     %input{:type=>'submit', :class=>"button", :value=>"Upload"}

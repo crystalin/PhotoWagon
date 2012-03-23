@@ -1,0 +1,38 @@
+%h2 Picasa Web Upload Page
+.picasa_upload
+  = form_for :postset, :html => {:multipart => true}, :url => picasa_create_admin_posts_path, :method => "post", :id=>"picasa_upload" do |f|
+    - @items.each_with_index do |item, index|
+      -@post = Post.new
+      -@post.id = index
+      = f.fields_for :post, {:index => index} do |post_form|
+        .picasa_post_front
+          .image= image_tag "#{item['imgsrc']}?size=300", :class => 'cropbox'
+          =post_form.hidden_field :image, :value => "#{item['imgsrc']}?size=1600"
+          =post_form.hidden_field :crop_front_x, :value => -1, :class => 'crop_x'
+          =post_form.hidden_field :crop_front_y, :value => -1, :class => 'crop_y'
+          =post_form.hidden_field :crop_front_w, :value => -1, :class => 'crop_w'
+          =post_form.hidden_field :crop_front_h, :value => -1, :class => 'crop_h'
+          %canvas{:class => "crop_canvas", :width => "300", :height => "168"}
+            =item['imgsrc']
+        .picasa_post_cover
+          .image
+            = image_tag "#{item['imgsrc']}?size=300", :class => 'cropbox'
+            %br
+            .good_cover_check
+              Is it a good cover?
+              =post_form.check_box :good_cover, {:checked => true}, true
+              Yes
+            .remove_it
+              Do you want to keep it?
+              =post_form.check_box :keep_it, {:checked => true}, true
+              Yes
+          =post_form.hidden_field :image, :value => "#{item['imgsrc']}?size=1600"
+          =post_form.hidden_field :crop_cover_x, :value => -1, :class => 'crop_x'
+          =post_form.hidden_field :crop_cover_y, :value => -1, :class => 'crop_y'
+          =post_form.hidden_field :crop_cover_w, :value => -1, :class => 'crop_w'
+          =post_form.hidden_field :crop_cover_h, :value => -1, :class => 'crop_h'
+          %canvas{:class => "crop_canvas", :width => "972", :height => "240"}
+            =item['imgsrc']
+        %hr.clear
+    .buttons.clear
+      %input{:type=>'submit', :class=>"button", :value=>"Upload"}
