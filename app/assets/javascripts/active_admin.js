@@ -9,18 +9,18 @@ function init_crop(picasa_post)  {
     var inputY = picasa_post.find('.crop_y');
     var inputW = picasa_post.find('.crop_w');
     var inputH = picasa_post.find('.crop_h');
-
     var canvas = picasa_post.find('canvas');
-    var ctx = canvas.get(0).getContext('2d');
 
     if (inputX.val() == -1) {
         var ratio =  canvas.width() / canvas.height();
         inputX.val(0);
         inputY.val(Math.round((img.height - img.width / ratio)/2));
         inputW.val(img.width);
-        inputH.val(Math.round(img.width * ratio));
+        inputH.val(Math.round(img.width / ratio));
     }
-    console.log([inputX.val(), inputY.val(), inputW.val(), inputH.val()]);
+//    $('.debug').append([inputX.val(), inputY.val(), inputW.val(), inputH.val()].join(', ') + '<br />');
+
+    var ctx = canvas.get(0).getContext('2d');
 
     var x = parseInt(inputX.val());
     var y = parseInt(inputY.val());
@@ -63,4 +63,5 @@ function update_crop(canvas, ctx, img, inputX, inputY, inputW, inputH, coords) {
     inputY.val(Math.round(coords.y));
     inputW.val(Math.round(coords.w));
     inputH.val(Math.round(coords.h));
+//    $('.debug').append([inputX.val(), inputY.val(), inputW.val(), inputH.val()].join(', ') + '<br />');
 }

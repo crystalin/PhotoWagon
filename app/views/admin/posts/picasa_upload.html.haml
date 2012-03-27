@@ -1,4 +1,5 @@
 %h2 Picasa Web Upload Page
+.debug
 .picasa_upload
   = form_for :postset, :html => {:multipart => true}, :url => picasa_create_admin_posts_path, :method => "post", :id=>"picasa_upload" do |f|
     - @items.each_with_index do |item, index|
@@ -6,7 +7,7 @@
       -@post.id = index
       = f.fields_for :post, {:index => index} do |post_form|
         .picasa_post_front
-          .image= image_tag "#{item['imgsrc']}?size=300", :class => 'cropbox'
+          .image= image_tag "#{item['imgsrc']}?size=1600", :class => 'cropbox'
           =post_form.hidden_field :image, :value => "#{item['imgsrc']}?size=1600"
           =post_form.hidden_field :crop_front_x, :value => -1, :class => 'crop_x'
           =post_form.hidden_field :crop_front_y, :value => -1, :class => 'crop_y'
@@ -16,7 +17,7 @@
             =item['imgsrc']
         .picasa_post_cover
           .image
-            = image_tag "#{item['imgsrc']}?size=300", :class => 'cropbox'
+            = image_tag "#{item['imgsrc']}?size=1600", :class => 'cropbox'
             %br
             .good_cover_check
               Is it a good cover?

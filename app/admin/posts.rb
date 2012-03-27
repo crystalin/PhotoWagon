@@ -1,4 +1,8 @@
 ActiveAdmin.register Post do
+  skip_before_filter :verify_authenticity_token, :only => :picasa_upload
+  before_filter :authenticate_active_admin_user , :except => :picasa_upload
+
+  require 'zip/zip'
 
   #index :as => :grid do |post|
   #  link_to(image_tag(post.image_url(:front_page)), admin_post_path(post))
@@ -58,13 +62,36 @@ ActiveAdmin.register Post do
     redirect_to :action => :show, :notice => "Image cropped"
   end
 
-  collection_action :picasa_upload do
+  collection_action :picasa_install do
+    #also used to reset the cookies
+    cookies.permanent["last_post_date_#{current_subdomain}"] = nil
+
+    @filename = "#{request.host}_picasa_upload.pbz"
+    @uuid = UUIDTools::UUID.md5_create(UUIDTools::UUID_DNS_NAMESPACE, request.host_with_port)
+
+    template = ERB.new IO.read(Rails.root.join('app','views','picasa','button.xml.erb'))
+    @pbf = template.result(binding)
+    render 'picasa/install'
+  end
+
+
+  collection_action :picasa_upload, :method => :get do
+  end
+
+  collection_action :picasa_upload, :method => :post do
+    @items = []
     if params['rss'].nil?
       params[:notice] = 'No Rss Provided'
       #redirect_to root_path
-      @items = []
       Post.limit(1).order('id desc').each do |post|
         @items <<  { "imgsrc" => post.image_url}
+      end
+    else
+      content = params['rss']["tempfile"] || params['rss']
+      rss_hash = Hash.from_xml(content)
+      @items = rss_hash['rss']['channel']['item']
+      if not @items.is_a? Array
+        @items = [@items]
       end
     end
   end
@@ -73,18 +100,15 @@ ActiveAdmin.register Post do
 
     @posts = []
     redirect_to :action => :picasa_upload, :notice => "Missing the photos" if not params['postset'] or not params['postset']['post']
-    #puts params['postset']['post']
     params['postset']['post'].each do |index, post_data|
-      #puts "post "
-      #puts post
       if (post_data['keep_it'] == "true")
         post = Post.new(post_data)
-        post.remote_image_url = "http://localhost:3000/#{post_data['image']}"
+        post.remote_image_url = "#{post_data['image']}"
         post.site_name = 'zurich'
         post.save!
       end
     end
-    render @posts.to_xml
+    redirect_to :action => :index, :notice => 'Posts added'
   end
 
   action_item :only => :show do
@@ -93,6 +117,10 @@ ActiveAdmin.register Post do
 
   action_item do
     link_to "Picasa Upload", picasa_upload_admin_posts_path
+  end
+
+  action_item do
+    link_to "Picasa Install", picasa_install_admin_posts_path
   end
 
 
