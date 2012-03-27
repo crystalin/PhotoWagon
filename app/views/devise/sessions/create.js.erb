@@ -1,0 +1,21 @@
+
+
+<% if current_admin_user %>
+
+// We could also render a partial to display the comment here
+$('#user_login_box').append("<%= current_admin_user.email %>");
+
+// Hide form
+$('.login_box').hide();
+
+<% else %>
+
+// Create a list of errors
+var errors = $('<ul />');
+
+errors.append('<li>Wrong password or login</li>');
+
+// Display errors on form
+$('#user_login_box').html(errors);
+
+<% end %>

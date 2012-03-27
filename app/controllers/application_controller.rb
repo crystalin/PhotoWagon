@@ -7,9 +7,9 @@ class ApplicationController < ActionController::Base
 
   before_filter :restore_cookies
 
-  rescue_from ActiveRecord::RecordNotFound do |exception|
-    redirect_to root_url, :alert => "La ressource (photo, commentaire,...) que vous cherchez est introuvable"
-  end
+  #rescue_from ActiveRecord::RecordNotFound do |exception|
+  #  redirect_to root_url, :alert => "La ressource (photo, commentaire,...) que vous cherchez est introuvable"
+  #end
 
   private
 

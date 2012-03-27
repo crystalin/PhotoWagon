@@ -5,42 +5,61 @@ ActiveAdmin.register Post do
   require 'zip/zip'
 
   #index :as => :grid do |post|
-  #  link_to(image_tag(post.image_url(:front_page)), admin_post_path(post))
+  #  link_to(image_tag(post.image_url(:cover_page)), admin_post_path(post))
   #end
 
   index :as => :block do |post|
     div :class => 'post_image', :for => post do
-      link_to(image_tag(post.image_url(:front_page)), admin_post_path(post))
+      link_to(image_tag(post.image_url(:cover_page)), admin_post_path(post))
     end
   end
 
   show do
     h3 post.title
     div do
-      post.crop_cover_x
-    end
-    div :class => 'picasa_post_front' do
-      form_for post, :as => :post, :method => :get, :url => {:action => :crop_cover} do |f|
-        inputs = ""
-        #for attribute in [:crop_cover_x, :crop_cover_y, :crop_cover_h, :crop_cover_w]
-        #  inputs << f.hidden_field(attribute, :id => attribute)
+      form_for(post, :as => :post, :method => :post, :url => {:action => :crop}) do |f|
+        output = f.submit("Crop")
+        output << content_tag('div', :class => 'picasa_post_front') do
+          output2 = content_tag('div', :class => 'image') do
+            output3 = f.hidden_field(:crop_front_x, :value => post.crop_front_x || -1, :class => 'crop_x')
+            output3 << f.hidden_field(:crop_front_y, :value => post.crop_front_y || -1, :class => 'crop_y')
+            output3 << f.hidden_field(:crop_front_w, :value => post.crop_front_w || -1, :class => 'crop_w')
+            output3 << f.hidden_field(:crop_front_h, :value => post.crop_front_h || -1, :class => 'crop_h')
+            output3 <<  image_tag(post.image_url, :class => 'cropbox')
+            output3
+          end
+          output2 << content_tag('canvas', nil, :width => 300, :height => 168, :class => 'crop_canvas')
+          output2
+        end
+        output << content_tag('div', :class => 'picasa_post_cover') do
+          output2 = content_tag('div', :class => 'image') do
+            output3 = f.hidden_field(:crop_cover_x, :value => post.crop_cover_x || -1, :class => 'crop_x')
+            output3 << f.hidden_field(:crop_cover_y, :value => post.crop_cover_y || -1, :class => 'crop_y')
+            output3 << f.hidden_field(:crop_cover_w, :value => post.crop_cover_w || -1, :class => 'crop_w')
+            output3 << f.hidden_field(:crop_cover_h, :value => post.crop_cover_h || -1, :class => 'crop_h')
+            output3 <<  image_tag(post.image_url, :class => 'cropbox')
+            output3
+          end
+          output2 << content_tag('canvas', nil, :width => 972, :height => 240, :class => 'crop_canvas')
+          output2
+        end
+        #div :class => 'picasa_post_cover' do
+        #  div do
+        #    div :class => 'image' do
+        #      output = ""
+        #      output << f.hidden_field(:crop_cover_x, :value => post.crop_cover_x || -1, :class => 'crop_x')
+        #      output << f.hidden_field(:crop_cover_y, :value => post.crop_cover_y || -1, :class => 'crop_y')
+        #      output << f.hidden_field(:crop_cover_w, :value => post.crop_cover_w || -1, :class => 'crop_w')
+        #      output << f.hidden_field(:crop_cover_h, :value => post.crop_cover_h || -1, :class => 'crop_h')
+        #      output << image_tag(post.image_url, :class => 'cropbox')
+        #      output.html_safe
+        #    end
+        #    div do
+        #      content_tag('canvas', nil, :width => 972, :height => 240, :class => 'crop_canvas')
+        #    end
+        #  end
         #end
-        inputs << f.hidden_field(:crop_cover_x, :value => post.crop_cover_x || 0, :class => 'cover_x')
-        inputs << f.hidden_field(:crop_cover_y, :value => post.crop_cover_y || 0, :class => 'cover_y')
-        inputs << f.hidden_field(:crop_cover_w, :value => post.crop_cover_w || post.information["ImageWidth"], :class => 'cover_w')
-        inputs << f.hidden_field(:crop_cover_h, :value => post.crop_cover_h || post.information["ImageWidth"] / ImageUploader::IMAGE_SIZES[:front_page][0] * ImageUploader::IMAGE_SIZES[:front_page][1], :class => 'cover_h')
-        inputs << f.submit("Crop")
-        inputs.html_safe
       end
-    end
-    div :class => 'crop_preview' do
-      image_tag(post.image_url)
-    end
-    div do
-      image_tag(post.image_url(:cover))
-    end
-    div do
-      image_tag(post.image_url, :id => 'cropbox')
     end
   end
 
@@ -51,8 +70,12 @@ ActiveAdmin.register Post do
     redirect_to :action => :show, :notice => "Information read and save"
   end
 
-  member_action :crop_cover do
+  member_action :crop, :method => :post do
     post = Post.find(params[:id])
+    post.crop_front_x = params[:post]["crop_front_x"].to_i
+    post.crop_front_y = params[:post]["crop_front_y"].to_i
+    post.crop_front_h = params[:post]["crop_front_h"].to_i
+    post.crop_front_w = params[:post]["crop_front_w"].to_i
     post.crop_cover_x = params[:post]["crop_cover_x"].to_i
     post.crop_cover_y = params[:post]["crop_cover_y"].to_i
     post.crop_cover_h = params[:post]["crop_cover_h"].to_i
@@ -76,15 +99,18 @@ ActiveAdmin.register Post do
 
 
   collection_action :picasa_upload, :method => :get do
-  end
+  end if Rails.env.development?
 
   collection_action :picasa_upload, :method => :post do
     @items = []
     if params['rss'].nil?
-      params[:notice] = 'No Rss Provided'
-      #redirect_to root_path
-      Post.limit(1).order('id desc').each do |post|
-        @items <<  { "imgsrc" => post.image_url}
+      if Rails.env.development?
+        Post.limit(1).order('id desc').each do |post|
+          @items <<  { "imgsrc" => post.image_url}
+        end
+      else
+        params[:notice] = 'No Rss Provided'
+        redirect_to root_path
       end
     else
       content = params['rss']["tempfile"] || params['rss']
@@ -97,7 +123,6 @@ ActiveAdmin.register Post do
   end
 
   collection_action :picasa_create, :method => :post do
-
     @posts = []
     redirect_to :action => :picasa_upload, :notice => "Missing the photos" if not params['postset'] or not params['postset']['post']
     params['postset']['post'].each do |index, post_data|
@@ -108,18 +133,18 @@ ActiveAdmin.register Post do
         post.save!
       end
     end
-    redirect_to :action => :index, :notice => 'Posts added'
+    render :nothing => true
   end
 
   action_item :only => :show do
     link_to "Update IPTC data", read_information_admin_post_path(post), :confirm => "Description and Title will be replaced.\n\nAre you sure?"
   end
 
-  action_item do
+  action_item :only => :index do
     link_to "Picasa Upload", picasa_upload_admin_posts_path
-  end
+  end if Rails.env.development?
 
-  action_item do
+  action_item :only => :index do
     link_to "Picasa Install", picasa_install_admin_posts_path
   end
 

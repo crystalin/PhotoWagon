@@ -40,6 +40,20 @@ function init_crop(picasa_post)  {
     });
 }
 
+$(document).ready(function() {
+
+//    $('form#session_new').bind('ajax:complete', function(e, data, status, xhr) {
+//        console.log(data);
+//        if(data.success()) {
+//            $('#user_login_box').html(data);
+//            $('#login').hide();
+//        } else {
+//            $('#user_login_box').prepend(data.errors.join('<br />'));
+//        }
+//    });
+
+});
+
 $(function() {
     $('.picasa_post_front, .picasa_post_cover').each(function() {
         var picasa_post = $(this);
