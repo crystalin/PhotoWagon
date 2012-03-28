@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-  skip_load_resource :only => :create
 
   rescue_from ActiveRecord::RecordInvalid do |exception|
     flash[:alert] = "Nom ou contenu du commentaire incomplet (minimum 2 caracteres)"
