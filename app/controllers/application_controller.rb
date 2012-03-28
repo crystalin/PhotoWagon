@@ -27,8 +27,8 @@ class ApplicationController < ActionController::Base
   end
 
   def current_subdomain
-    #@subdomain ||= request.subdomain.presence || "zurich"
-    @subdomain ||= "zurich"
+    @subdomain ||= "zurich" if Rails.env.development?
+    @subdomain ||= request.subdomain.presence || "zurich"
   end
 
   def restore_cookies
