@@ -10,7 +10,7 @@ ActiveAdmin.register Post do
 
   index :as => :block do |post|
     div :class => 'post_image', :for => post do
-      link_to(image_tag(post.image_url(:cover_page)), admin_post_path(post))
+      link_to(image_tag(post.image_url(:front_page)), admin_post_path(post))
     end
   end
 
