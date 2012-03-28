@@ -7,6 +7,7 @@
  *= depend_on base.css
  *= depend_on colorbox.css
  *= depend_on pagination.css
+ *= depend_on spam_filter.css
  *= depend_on percents.css
  *= depend_on sites/dubai.css
  *= depend_on sites/zurich.css
@@ -32,6 +33,9 @@
 @import "blueprint/scaffolding";
 
 @import "compass/css3/border-radius";
+
+
+@import "spam_filter";
 
 // To generate css equivalent to the blueprint css but with your
 // configuration applied, uncomment:
@@ -141,7 +145,7 @@ h2 {
   }
   .subtitle {
     color: #383;
-    font-size: 11px;
+    font-size: 12px;
   }
   .image {
     margin: 5px 0;

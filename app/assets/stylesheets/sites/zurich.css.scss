@@ -42,4 +42,31 @@ body.zurich {
  hr {
    background-color: #ccc;
  }
+
+  .front_comments {
+    .comment {
+      .author {
+        color: #FB7;
+      }
+      .content {
+        font-size: inherit;
+        color: #FCA;
+      }
+      &.highlight {
+        .author {
+          color: #252;
+        }
+        .content {
+          font-size: inherit;
+          color: #264;
+        }
+      }
+      .date {
+        color: #CCC;
+      }
+    }
+    h3 {
+      border-bottom: 1px solid #000;
+    }
+  }
 }

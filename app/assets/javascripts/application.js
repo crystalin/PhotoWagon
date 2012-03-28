@@ -8,6 +8,7 @@
 //= require jquery_ujs
 //= require jquery.colorbox
 //= require crop_photos
+//= require spam_filter
 //= require_tree .
 //= require jquery.Jcrop
 
