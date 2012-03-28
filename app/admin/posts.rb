@@ -128,8 +128,8 @@ ActiveAdmin.register Post do
     params['postset']['post'].each do |index, post_data|
       if (post_data['keep_it'] == "true")
         post = Post.new(post_data)
-        post.remote_image_url = "#{post_data['image']}"
-        post.site_name = 'zurich'
+        post.remote_image_url = "#{post_data['image']}" if Rails.env.development?
+        post.site_name = current_domain
         post.save!
       end
     end
