@@ -21,6 +21,7 @@ class CommentsController < ApplicationController
     else
       @comment = @post.comments.build(params[:comment])
       cookies.permanent[:comment_name] = @comment.author if @comment.author
+      cookies.permanent[:comment_email] = @comment.email if @comment.email
       if @comment.save!
         redirect_to @post, :notice => "Votre commentaire a &#233;t&#233; publi&#233;".html_safe
       else

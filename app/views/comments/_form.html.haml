@@ -5,7 +5,11 @@
     %p
       = f.label :author, "Votre nom"
       %br
-      = f.text_field :author, :value => @comment.author ||  comment_name
+      = f.text_field :author, :value => @comment.author || current_name || comment_name
+    %p
+      = f.label :email, "Votre email (pour gravatar picture)"
+      %br
+      = f.text_field :email, :value => @comment.email || current_email || comment_email
     %p
       = f.label :content, "Commentaire"
       %br

@@ -1,0 +1,10 @@
+%li.comment
+  .avatar
+    =gravatar_image_tag comment.email, :gravatar => { :size => 35 }
+  .head
+    %span.author
+      =comment.author.capitalize
+    %span.date
+      =comment.created_at.getlocal.strftime("%k:%M le %d %B")
+  .content
+    = simple_format(comment.content)

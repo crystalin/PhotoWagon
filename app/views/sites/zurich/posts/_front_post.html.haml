@@ -1,0 +1,14 @@
+.front_post
+  .image=link_to image_tag(front_post.image_url(:front_page)), front_post.image_url(:full_page), :title => front_post.title, :rel => 'front_image', :class => "popup_image"  if front_post.image_url
+  %h2.title=link_to front_post.title, front_post
+  .subtitle= front_post.published_on.getlocal.strftime("%A %d %B, %Y - %T") if front_post.published_on
+  .description= front_post.body.html_safe
+  .clear
+  - if not front_post.comments.empty?
+    .post_comments
+      %ul.comment_list
+      =render :partial => "comments/comment", :collection => front_post.comments if not front_post.comments.empty?
+      .comment_form
+        -#- @comment = Comment.new
+        -#- @comment.post = front_post
+        -#= render :partial => "comments/form"

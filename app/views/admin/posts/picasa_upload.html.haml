@@ -17,9 +17,10 @@
       - @post = Post.new
       - @post.id = index
       = f.fields_for :post, {:index => index} do |post_form|
+        =hidden_field_tag "#{item['imgsrc']}?size=1600"
+        =post_form.hidden_field :image, :value => "#{item['imgsrc']}?size=1600"
         .picasa_post_front
           .image= image_tag "#{item['imgsrc']}?size=1600", :class => 'cropbox'
-          =post_form.hidden_field :image, :value => "#{item['imgsrc']}?size=1600"
           =post_form.hidden_field :crop_front_x, :value => -1, :class => 'crop_x'
           =post_form.hidden_field :crop_front_y, :value => -1, :class => 'crop_y'
           =post_form.hidden_field :crop_front_w, :value => -1, :class => 'crop_w'
@@ -38,7 +39,6 @@
               Do you want to keep it?
               =post_form.check_box :keep_it, {:checked => true}, true
               Yes
-          =post_form.hidden_field :image, :value => "#{item['imgsrc']}?size=1600"
           =post_form.hidden_field :crop_cover_x, :value => -1, :class => 'crop_x'
           =post_form.hidden_field :crop_cover_y, :value => -1, :class => 'crop_y'
           =post_form.hidden_field :crop_cover_w, :value => -1, :class => 'crop_w'

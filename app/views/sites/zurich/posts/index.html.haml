@@ -1,0 +1,12 @@
+.cover_post
+  .image= image_tag @posts.first.image_url(:cover) if @posts.first
+= paginate @posts, :inner_window => 10, :outer_window => 3
+.clear
+.posts
+  =render :partial => "front_post", :collection => @posts
+.comments_bar
+  %h2 Derniers commentaires
+
+  =render :partial => "comments/front_comment", :collection => Comment.recent.on_site(current_subdomain).limit(30)
+.clear
+= paginate @posts, :inner_window => 10, :outer_window => 3

@@ -60,7 +60,6 @@ class PostsController < ApplicationController
     if cookies["last_post_date_#{current_subdomain}"].nil? || cookies["last_post_date_#{current_subdomain}"].empty? || (cookies["last_post_date_#{current_subdomain}"].to_time < last_post.published_on)
       cookies.permanent["last_post_date_#{current_subdomain}"] = last_post.published_on
     end
-
   end
 
 end

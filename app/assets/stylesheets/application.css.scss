@@ -65,6 +65,8 @@ form.bp {
 
 // Page layout can be done using mixins applied to your semantic classes and IDs:
 body {
+  font-size: 13px;
+  font-family: 'Lucida Grande', Arial, sans-serif;
   #container {
     @include container;
     position: relative;
@@ -73,10 +75,10 @@ body {
     border-right: 1px solid #888;
     border-left: 1px solid #888;
   }
+
   #header, #footer, #content {
     @include column($blueprint-grid-columns);
   }
-
 
   #footer {
     border-top: 2px solid #000;
@@ -114,10 +116,11 @@ body {
 }
 
 h2 {
-  font-size: 28px;
+  font-size: 18px;
   color: #846;
   margin: 5px 2px;
   padding: 5px 10px;
+  /*border-bottom: 1px solid #DA9*/
 }
 
 .site_title {

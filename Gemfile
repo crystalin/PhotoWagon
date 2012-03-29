@@ -20,6 +20,7 @@ gem 'mini_exiftool', :platforms => :ruby
 
 gem "bcrypt-ruby", :require => "bcrypt"
 
+gem 'gravatar_image_tag'
 
 gem 'backup'
 gem 'backup-task'

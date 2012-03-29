@@ -43,22 +43,6 @@ ActiveAdmin.register Post do
           output2 << content_tag('canvas', nil, :width => 972, :height => 240, :class => 'crop_canvas')
           output2
         end
-        #div :class => 'picasa_post_cover' do
-        #  div do
-        #    div :class => 'image' do
-        #      output = ""
-        #      output << f.hidden_field(:crop_cover_x, :value => post.crop_cover_x || -1, :class => 'crop_x')
-        #      output << f.hidden_field(:crop_cover_y, :value => post.crop_cover_y || -1, :class => 'crop_y')
-        #      output << f.hidden_field(:crop_cover_w, :value => post.crop_cover_w || -1, :class => 'crop_w')
-        #      output << f.hidden_field(:crop_cover_h, :value => post.crop_cover_h || -1, :class => 'crop_h')
-        #      output << image_tag(post.image_url, :class => 'cropbox')
-        #      output.html_safe
-        #    end
-        #    div do
-        #      content_tag('canvas', nil, :width => 972, :height => 240, :class => 'crop_canvas')
-        #    end
-        #  end
-        #end
       end
     end
   end
@@ -124,16 +108,27 @@ ActiveAdmin.register Post do
 
   collection_action :picasa_create, :method => :post do
     @posts = []
+    params[:notice] = ""
     redirect_to :action => :picasa_upload, :notice => "Missing the photos" if not params['postset'] or not params['postset']['post']
     params['postset']['post'].each do |index, post_data|
       if (post_data['keep_it'] == "true")
-        post = Post.new(post_data)
-        post.remote_image_url = "#{post_data['image']}" if Rails.env.development?
-        post.site_name = current_subdomain
-        post.save!
+        image_name = post_data.delete(:image)
+        uploaded_file = params.delete(image_name)
+        if uploaded_file.is_a? ActionDispatch::Http::UploadedFile
+          post = Post.new(post_data)
+          post.image = uploaded_file
+          post.site_name = current_subdomain
+          if post.save
+            params[:notice] += "#{uploaded_file.original_filename} uploaded.\n "
+          else
+            params[:notice] += "#{uploaded_file.original_filename} FAILED.\n "
+          end
+        else
+          params[:notice] += "#{image_name} is not a file.\n "
+        end
       end
     end
-    render :nothing => true
+    render :text => params[:notice]
   end
 
   action_item :only => :show do

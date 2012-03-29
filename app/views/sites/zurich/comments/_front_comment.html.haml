@@ -1,0 +1,8 @@
+.comment
+  %span.author
+    #{front_comment.author.capitalize}
+  on
+  =link_to front_comment.post.title, front_comment.post
+  .content
+    .date= "#{front_comment.created_at.getlocal.strftime("%k:%M le %d %B")}"
+    = simple_format(front_comment.content)

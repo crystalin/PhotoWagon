@@ -3,9 +3,11 @@ class ApplicationController < ActionController::Base
   helper_method :missing_photos
   helper_method :last_visited_page
   helper_method :comment_name
+  helper_method :comment_email
   helper_method :current_subdomain
 
   before_filter :restore_cookies
+  before_filter :subdomain_view_path
 
   #rescue_from ActiveRecord::RecordNotFound do |exception|
   #  redirect_to root_url, :alert => "La ressource (photo, commentaire,...) que vous cherchez est introuvable"
@@ -26,6 +28,10 @@ class ApplicationController < ActionController::Base
     @comment_name ||= cookies[:comment_name]
   end
 
+  def comment_email
+    comment_email ||= cookies[:comment_email]
+  end
+
   def current_subdomain
     @subdomain ||= "zurich" if Rails.env.development?
     @subdomain ||= request.subdomain.presence || "zurich"
@@ -36,6 +42,11 @@ class ApplicationController < ActionController::Base
       cookies.permanent["last_post_date_#{current_subdomain}"] ||= cookies["last_post_date"]
       cookies.delete "last_post_date"
     end
+  end
+
+  def subdomain_view_path
+    prepend_view_path "app/views/sites/#{current_subdomain}"
+
   end
 
 end

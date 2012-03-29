@@ -1,10 +1,11 @@
 
 body.zurich {
-  background:  asset_url('zurich/bg.jpg','images') repeat #2b1817;
+  background:  asset-url('zurich/bg-low.jpg','images') repeat #2b1817;
+  /*background:  asset-url('zurich/bg.gif','images') repeat #2b1817;*/
 
   #container {
-    border-color: #e0745f;
-    background:  asset_url('zurich/bg-inside.jpg','images');
+    border: none;
+    /*background:  asset-url('zurich/bg-inside.jpg','images');*/
   }
   #content {
     min-height: 1000px;
@@ -15,58 +16,190 @@ body.zurich {
     border-color: #e0745f;
   }
 
-   #menu {
+  #menu {
     border-color: #e0745f;
   }
 
- #background {
-   background:  asset_url('zurich/background.png','images') no-repeat top center;
-   height: 1098px;
- }
+  #background {
+    /*background:  asset-url('zurich/background.png','images') no-repeat top center;*/
+    height: 1098px;
+  }
+ 
+  a, a:visited {
+    color: #e0745f;
+  }
 
- a, a:visited {
-   color: #e0745f;
- }
+  .site {
+    background-color: #422323;
+    border-color: #aa5556;
 
- .site {
-   background-color: #422323;
-   border-color: #AA5556;
+  }
 
- }
+  .cover_post {
+    img {
+      border-color: white;
+    }
+  }
 
- h2 {
-   color: #ba6158;
- }
+  .posts {
+    @include column(8);
+  }
 
- color: #ccc;
- hr {
-   background-color: #ccc;
- }
-
-  .front_comments {
-    .comment {
-      .author {
-        color: #FB7;
-      }
-      .content {
-        font-size: inherit;
-        color: #FCA;
-      }
-      &.highlight {
-        .author {
-          color: #252;
-        }
-        .content {
-          font-size: inherit;
-          color: #264;
-        }
-      }
-      .date {
-        color: #CCC;
+  .front_post, .post {
+    min-height: 180px;
+    /*background:  asset-url('zurich/bg-low2.jpg','images') repeat #2b1817;*/
+    margin-bottom: 10px;
+    padding-top: 2px;
+    clear: both;
+    .image {
+      img {
+        border: 3px solid white;
       }
     }
-    h3 {
-      border-bottom: 1px solid #000;
+    h2 a {
+      font-size: 16px;
+      color: #bf7;
+    }
+
+    .title {
+      border-bottom: 1px solid #77d624;
+    }
+    .description {
+      margin-top: 1em;
+      text-indent: 1.5em;
+      font-style: italic;
+      line-height: 1.15em;
+      color: #ABA;
+      text-align: justify
+    }
+    .subtitle {
+      color: #5c998c;
+    }
+  }
+
+  .front_post:nth-child(odd) {
+    .image {
+      float: left;
+    }
+    .title {
+      padding-left: 320px;
+    }
+    .subtitle {
+      padding-left: 320px;
+    }
+    .description {
+      padding-left: 320px;
+    }
+    .comment_link {
+      padding-left: 320px;
+    }
+  }
+
+  .front_post:nth-child(even) {
+    .image {
+      float: right;
+    }
+    .title {
+      padding-right: 320px;
+    }
+    .subtitle {
+      padding-right: 320px;
+    }
+    .description {
+      padding-right: 320px;
+    }
+    .comment_link {
+      padding-right: 320px;
+    }
+  }
+
+  h2 {
+    color: #ba6158;
+  }
+
+  color: #ccc;
+  hr {
+    background-color: #ccc;
+  }
+  .comments_bar {
+    @include column(4,true);
+    .comment {
+      /*color: #DaA18C;*/
+      color: #a67869;
+      padding: 2px 4px;
+      border-bottom: 1px solid #666;
+      margin: 2px 4px;
+
+      .author {
+        color: #ba6158;
+      }
+      .content {
+        font-style: italic;
+        line-height: 1.2em;
+        padding-left: 10px;
+        padding-bottom: 2px;
+        margin-bottom: 1px;
+        .date {
+          float: right;
+          margin: 2px 5px;
+          font-size: 11px;
+          color: #ba6158;
+        }
+      }
+    }
+  }
+
+  .post_comments, .front_comments {
+    border: 2px solid #333;
+    padding: 0 5px;
+    text-align: left;
+    
+    li {
+      display: block;
+    }
+    .comment {
+      margin: 12px 2px 6px 2px;
+      overflow: hidden;
+      color: #a67869;
+
+    }
+    .avatar {
+      float: left;
+      img {
+        border: 2px solid white;
+      }
+    }
+
+    .head {
+      margin-bottom: 1px;
+      margin-left: 50px;
+      padding-left: 4px;
+      color: #8F8;
+      border-bottom: 1px solid #99D;
+      font-size: 0.8em;
+      line-height: 17px;
+      text-indent: 1.5em;
+    }
+    .author {
+      font-size: 16px;
+      color: #8F8;
+
+    }
+
+    .date {
+      font-size: 11px;
+      padding-left: 15px;
+      color: #FDFFBF;
+      font-style: italic;
+    }
+
+    .content {
+      line-height: 1.2em;
+      margin-left: 50px;
+      padding-left: 15px;
+      padding-top: 5px;
+      font-style: italic;
+      color: #a67869;
     }
   }
 }
