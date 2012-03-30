@@ -1,5 +1,7 @@
 
 body.zurich {
+  font-size: 13px;
+  font-family: 'Lucida Grande', Arial, sans-serif;
   background:  asset-url('zurich/bg-low.jpg','images') repeat #2b1817;
   /*background:  asset-url('zurich/bg.gif','images') repeat #2b1817;*/
 
@@ -133,18 +135,18 @@ body.zurich {
       .author {
         color: #ba6158;
       }
+      .date {
+        float: right;
+        margin: 2px 5px;
+        font-size: 11px;
+        color: #ba6158;
+      }
       .content {
         font-style: italic;
         line-height: 1.2em;
         padding-left: 10px;
         padding-bottom: 2px;
         margin-bottom: 1px;
-        .date {
-          float: right;
-          margin: 2px 5px;
-          font-size: 11px;
-          color: #ba6158;
-        }
       }
     }
   }

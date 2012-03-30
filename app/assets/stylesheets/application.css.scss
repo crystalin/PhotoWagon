@@ -65,8 +65,6 @@ form.bp {
 
 // Page layout can be done using mixins applied to your semantic classes and IDs:
 body {
-  font-size: 13px;
-  font-family: 'Lucida Grande', Arial, sans-serif;
   #container {
     @include container;
     position: relative;
