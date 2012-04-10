@@ -152,10 +152,9 @@ body.zurich {
   }
 
   .post_comments, .front_comments {
-    border: 2px solid #333;
     padding: 0 5px;
     text-align: left;
-    
+
     li {
       display: block;
     }
@@ -172,20 +171,28 @@ body.zurich {
       }
     }
 
+    .author {
+      font-size: 16px;
+      color: #8F8;
+    }
+
+    .head {
+      color: #8F8;
+    }
+  }
+
+
+  .post_comments {
+    border: 2px solid #333;
+
     .head {
       margin-bottom: 1px;
       margin-left: 50px;
       padding-left: 4px;
-      color: #8F8;
       border-bottom: 1px solid #99D;
       font-size: 0.8em;
       line-height: 17px;
       text-indent: 1.5em;
-    }
-    .author {
-      font-size: 16px;
-      color: #8F8;
-
     }
 
     .date {
@@ -198,6 +205,23 @@ body.zurich {
     .content {
       line-height: 1.2em;
       margin-left: 50px;
+      margin-bottom: 3px;
+      padding-left: 15px;
+      padding-top: 5px;
+      font-style: italic;
+      color: #a67869;
+    }
+  }
+
+
+  .front_comments {
+    .head {
+      margin: 10px 0 2px 30px;
+    }
+
+    .content {
+      line-height: 1.25em;
+      margin: 10px 0 0 0;
       padding-left: 15px;
       padding-top: 5px;
       font-style: italic;
