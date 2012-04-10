@@ -215,6 +215,13 @@ body.zurich {
 
 
   .front_comments {
+    .post_comments {
+      border: none;
+      .comment {
+        margin-left: 310px;
+      }
+    }
+
     .head {
       margin: 10px 0 2px 30px;
     }
@@ -227,5 +234,9 @@ body.zurich {
       font-style: italic;
       color: #a67869;
     }
+  }
+
+  .comment_line {
+    border-top: 2px solid #a67869;
   }
 }
