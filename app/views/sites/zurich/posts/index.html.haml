@@ -1,5 +1,6 @@
 .cover_post
-  .image= image_tag @posts.first.image_url(:cover) if @posts.first
+  - first_post = @posts.all.select {|post| post.good_cover}.first || @posts.first
+  .image= image_tag first_post.image_url(:cover) if first_post
 = paginate @posts, :inner_window => 10, :outer_window => 3
 .clear
 .posts
